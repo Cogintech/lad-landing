@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' rx='40' fill='%23ffd66b'/%3E%3Cpath d='M30 134V76L80 30l50 46v58z' fill='%232b2621'/%3E%3Cpath d='M56 90l18 18 36-40' fill='none' stroke='%23ffd66b' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Nunito:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Rubik:wght@400;500;600&family=Gloock&display=swap">
 <style>
 :root {
   --ink: #2b2621;
@@ -32,7 +32,8 @@
   --green: #2f6b52;
   --red: #a4462b;
   --serif: 'Gloock', Georgia, serif;
-  --sans: 'Nunito', system-ui, sans-serif;
+  --display: 'Unbounded', system-ui, sans-serif;
+  --sans: 'Rubik', system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -78,18 +79,18 @@ section[id] { scroll-margin-top: 104px; }
 .brand-text { display: flex; flex-direction: column; gap: 4px; }
 .brand-name { font-family: var(--serif); font-size: 24px; line-height: 1; letter-spacing: 0.02em; }
 .brand-tagline {
-  font-size: 12px; font-weight: 700; line-height: 1;
+  font-size: 12px; font-weight: 600; line-height: 1;
   letter-spacing: 0.02em; white-space: nowrap;
   color: var(--muted);
 }
-.nav { display: flex; gap: 2px; font-size: 14px; font-weight: 700; }
+.nav { display: flex; gap: 2px; font-size: 14px; font-weight: 600; }
 .nav a { padding: 8px 12px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
 .nav a:hover { background: var(--yellow-soft); }
 
 .btn {
   display: inline-block;
   font-family: var(--sans);
-  font-weight: 800;
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
   border-radius: 999px;
@@ -104,17 +105,17 @@ section[id] { scroll-margin-top: 104px; }
 
 /* ── Общие элементы ────────────────────────────────── */
 .eyebrow {
-  font-size: 13px; font-weight: 800;
+  font-size: 13px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted);
 }
 .h2 {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(32px, 3.4vw, 44px);
-  line-height: 1.06; letter-spacing: -0.015em;
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(26px, 2.8vw, 36px);
+  line-height: 1.12; letter-spacing: -0.01em;
   text-wrap: balance;
 }
-.h2-wide { font-size: clamp(34px, 4vw, 52px); line-height: 1.04; }
+.h2-wide { font-size: clamp(28px, 3.3vw, 42px); line-height: 1.1; }
 .lead { font-size: 17px; line-height: 1.6; font-weight: 500; color: var(--body); text-wrap: pretty; }
 
 .section-head {
@@ -143,9 +144,9 @@ section[id] { scroll-margin-top: 104px; }
 }
 .hero-copy { display: flex; flex-direction: column; gap: 24px; }
 .hero h1 {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(40px, 5.2vw, 68px);
-  line-height: 1.02; letter-spacing: -0.015em;
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(32px, 4.3vw, 56px);
+  line-height: 1.1; letter-spacing: -0.01em;
   text-wrap: balance;
 }
 .hero-lead { font-size: 18px; line-height: 1.6; font-weight: 500; max-width: 540px; text-wrap: pretty; }
@@ -154,7 +155,7 @@ section[id] { scroll-margin-top: 104px; }
   display: inline-flex; align-items: center; gap: 8px;
   padding-bottom: 2px;
   border-bottom: 2px solid var(--ink);
-  font-size: 17px; font-weight: 800;
+  font-size: 17px; font-weight: 600;
   text-decoration: none;
   transition: gap .15s;
 }
@@ -179,9 +180,9 @@ section[id] { scroll-margin-top: 104px; }
   border: 2px solid var(--ink);
 }
 .pillar-text { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
-.pillar-title { font-family: var(--serif); font-size: 26px; }
+.pillar-title { font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.2; }
 .pillar-text p { font-size: 15px; line-height: 1.5; font-weight: 500; }
-.pillar-arrow { font-size: 22px; font-weight: 800; }
+.pillar-arrow { font-size: 22px; font-weight: 600; }
 .bg-peach { background: var(--peach); }
 .bg-blue { background: var(--blue); }
 .bg-lilac { background: var(--lilac); }
@@ -196,8 +197,8 @@ section[id] { scroll-margin-top: 104px; }
   border-radius: 24px;
 }
 .board-title { display: flex; flex-direction: column; gap: 4px; min-width: 180px; }
-.board-title strong { font-family: var(--serif); font-weight: 400; font-size: 22px; }
-.board-title span { font-size: 13px; font-weight: 700; color: var(--muted); }
+.board-title strong { font-family: var(--display); font-weight: 500; font-size: 18px; }
+.board-title span { font-size: 13px; font-weight: 600; color: var(--muted); }
 .board-people {
   flex: 1 1 600px;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
@@ -208,25 +209,25 @@ section[id] { scroll-margin-top: 104px; }
   display: flex; align-items: center; justify-content: center;
   border-radius: 50%;
   border: 2px solid var(--ink);
-  font-weight: 800; font-size: 14px;
+  font-weight: 600; font-size: 14px;
 }
 .person-text { flex-grow: 1; display: flex; flex-direction: column; }
 .person-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-.person-top strong { font-size: 14px; font-weight: 800; }
-.person-top b { font-size: 12px; font-weight: 800; white-space: nowrap; }
-.person-task { font-size: 12px; font-weight: 600; color: var(--muted); }
-.person-time { font-size: 12px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+.person-top strong { font-size: 14px; font-weight: 600; }
+.person-top b { font-size: 12px; font-weight: 600; white-space: nowrap; }
+.person-task { font-size: 11px; font-weight: 500; color: var(--muted); }
+.person-time { font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 
 /* ── Зачем ЛАД ─────────────────────────────────────── */
 .why { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
 .compare { overflow: hidden; background: var(--white); border: 2px solid var(--ink); border-radius: 24px; }
 .compare-head, .compare-row { display: grid; grid-template-columns: 1fr 1fr; }
 .compare-head { background: var(--paper); border-bottom: 2px solid var(--ink); }
-.compare-head span { padding: 14px 28px; font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.compare-head span { padding: 14px 28px; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .compare-head span:last-child { color: var(--ink); }
 .compare-row + .compare-row { border-top: 1.5px solid var(--line); }
-.was { padding: 22px 28px; font-family: var(--serif); font-size: 20px; line-height: 1.3; color: var(--body); text-wrap: pretty; }
-.now { display: flex; gap: 12px; padding: 22px 28px; background: var(--cream); border-left: 1.5px solid var(--line); font-size: 16px; line-height: 1.55; font-weight: 600; }
+.was { padding: 22px 28px; font-family: var(--sans); font-weight: 400; font-size: 20px; line-height: 1.3; color: var(--body); text-wrap: pretty; }
+.now { display: flex; gap: 12px; padding: 22px 28px; background: var(--cream); border-left: 1.5px solid var(--line); font-size: 16px; line-height: 1.55; font-weight: 500; }
 .now::before {
   content: "✓";
   width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px;
@@ -234,7 +235,7 @@ section[id] { scroll-margin-top: 104px; }
   border-radius: 50%;
   background: var(--yellow);
   border: 2px solid var(--ink);
-  font-size: 12px; font-weight: 800;
+  font-size: 12px; font-weight: 600;
 }
 
 /* ── Как работает ──────────────────────────────────── */
@@ -251,9 +252,9 @@ section[id] { scroll-margin-top: 104px; }
   display: flex; align-items: center; justify-content: center;
   border-radius: 50%;
   border: 2px solid var(--ink);
-  font-family: var(--serif); font-size: 22px;
+  font-family: var(--display); font-weight: 500; font-size: 18px;
 }
-.step h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; }
+.step h3 { font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.2; }
 .step p { font-size: 16px; line-height: 1.6; font-weight: 500; color: var(--body); }
 
 /* ── Ранний доступ ──────────────────────────────────── */
@@ -265,21 +266,22 @@ section[id] { scroll-margin-top: 104px; }
 }
 .beta-copy { display: flex; flex-direction: column; gap: 20px; padding: 0 8px; }
 .beta-copy h2 {
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(26px, 2.6vw, 34px); line-height: 1.25;
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(22px, 2.2vw, 28px); line-height: 1.25;
   text-wrap: pretty;
 }
 .beta-copy p { max-width: 520px; }
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+.facts { display: flex; flex-wrap: wrap; gap: 16px; }
 .fact {
   display: flex; flex-direction: column; gap: 4px;
   padding: 22px 20px;
   background: var(--white);
   border: 2px solid var(--ink);
   border-radius: 20px;
+  flex: 1 1 150px;
 }
-.fact strong { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1; white-space: nowrap; }
-.fact span { font-size: 13px; font-weight: 700; color: var(--muted); }
+.fact strong { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+.fact span { font-size: 13px; font-weight: 600; color: var(--muted); }
 
 /* ── Разделы: текст + макет ────────────────────────── */
 .feature {
@@ -305,7 +307,7 @@ section[id] { scroll-margin-top: 104px; }
   border-radius: 50%;
   background: var(--paper);
   border: 2px solid var(--ink);
-  font-size: 12px; font-weight: 800;
+  font-size: 12px; font-weight: 600;
 }
 
 .mock {
@@ -321,11 +323,11 @@ section[id] { scroll-margin-top: 104px; }
   background: var(--paper);
   border-bottom: 2px solid var(--ink);
 }
-.mock-title { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; white-space: nowrap; }
+.mock-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; white-space: nowrap; }
 .dots { display: flex; gap: 5px; }
 .dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink); }
 .dots i:first-child { background: var(--ink); }
-.chips { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; font-weight: 800; white-space: nowrap; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; font-weight: 600; white-space: nowrap; }
 .chip { padding: 5px 10px; border-radius: 999px; background: var(--paper); border: 1.5px solid var(--ink); }
 .chip-mint { background: var(--mint); }
 .chip-peach { background: var(--peach); }
@@ -333,13 +335,13 @@ section[id] { scroll-margin-top: 104px; }
 
 .week { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .day { display: flex; flex-direction: column; gap: 8px; }
-.day-name { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.day-name { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .meal {
   padding: 10px;
   border-radius: 12px;
   background: var(--paper);
   border: 1.5px solid var(--line);
-  font-size: 13px; line-height: 1.3; font-weight: 600;
+  font-size: 13px; line-height: 1.3; font-weight: 500;
 }
 .meal-oven { background: var(--peach); border-color: var(--ink); }
 .meal-ai { background: var(--cream); border: 1.5px dashed var(--ink); color: var(--muted); }
@@ -349,12 +351,12 @@ section[id] { scroll-margin-top: 104px; }
   padding: 12px 14px;
   border-radius: 14px;
   border: 1.5px solid var(--ink);
-  font-size: 13px; font-weight: 600;
+  font-size: 13px; font-weight: 500;
 }
 .note svg { flex-shrink: 0; }
 .note-dashed { margin-top: auto; background: var(--cream); border-style: dashed; }
 
-.tasks { gap: 8px; font-size: 14px; font-weight: 600; }
+.tasks { gap: 8px; font-size: 14px; font-weight: 500; }
 .task {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   padding: 12px 14px;
@@ -362,7 +364,7 @@ section[id] { scroll-margin-top: 104px; }
   background: var(--paper);
   border: 1.5px solid var(--line);
 }
-.task span:last-child { flex-shrink: 0; font-size: 12px; font-weight: 800; color: var(--green); text-align: right; white-space: nowrap; }
+.task span:last-child { flex-shrink: 0; font-size: 12px; font-weight: 600; color: var(--green); text-align: right; white-space: nowrap; }
 .task-late { background: var(--peach); border-color: var(--ink); }
 .task-late span:last-child { color: var(--red); }
 
@@ -371,12 +373,12 @@ section[id] { scroll-margin-top: 104px; }
   display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;
   padding: 20px;
 }
-.bars { display: flex; flex-direction: column; justify-content: center; gap: 10px; font-size: 13px; font-weight: 700; }
+.bars { display: flex; flex-direction: column; justify-content: center; gap: 10px; font-size: 13px; font-weight: 600; }
 .bar-row { display: flex; align-items: center; gap: 10px; }
 .bar-row > span:first-child { width: 60px; }
 .bar-num { width: 38px; text-align: right; }
 .bar-gap { flex-grow: 1; }
-.bar-head { font-size: 11px; font-weight: 800; color: var(--muted); }
+.bar-head { font-size: 11px; font-weight: 600; color: var(--muted); }
 .bar { flex-grow: 1; height: 24px; overflow: hidden; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--paper); }
 .bar i { display: block; height: 100%; animation: fill 1.2s cubic-bezier(.2, .8, .2, 1) both; }
 .streak {
@@ -396,21 +398,21 @@ section[id] { scroll-margin-top: 104px; }
   border: 2px solid var(--ink);
   border-radius: 18px;
   box-shadow: 5px 5px 0 var(--lilac);
-  font-size: 13px; font-weight: 600;
+  font-size: 13px; font-weight: 500;
 }
-.done-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.done-task { font-weight: 800; font-size: 15px; }
+.done-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.done-task { font-weight: 600; font-size: 15px; }
 .done-row { display: flex; justify-content: space-between; }
-.done-row strong { font-weight: 800; white-space: nowrap; }
+.done-row strong { font-weight: 600; white-space: nowrap; }
 .done-total { padding-top: 10px; border-top: 1.5px dashed var(--ink); }
-.done-button { margin-top: 4px; padding: 11px; border-radius: 999px; background: var(--ink); color: var(--paper); text-align: center; font-weight: 800; }
+.done-button { margin-top: 4px; padding: 11px; border-radius: 999px; background: var(--ink); color: var(--paper); text-align: center; font-weight: 600; }
 @keyframes fill { from { width: 0; } }
 
 /* ── Вопросы ───────────────────────────────────────── */
 .faq { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
 .faq-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 20px; }
 .faq-item { display: flex; flex-direction: column; gap: 10px; padding: 28px; background: var(--white); border-radius: 24px; }
-.faq-item h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1.2; }
+.faq-item h3 { font-family: var(--display); font-weight: 500; font-size: 20px; line-height: 1.25; }
 .faq-item p { font-size: 16px; line-height: 1.6; font-weight: 500; color: var(--body); }
 
 /* ── Форма записи ─────────────────────────────────── */
@@ -435,7 +437,7 @@ section[id] { scroll-margin-top: 104px; }
   flex: 1 1 260px;
   min-height: 54px;
   padding: 16px 20px;
-  font: 600 16px var(--sans);
+  font: 500 16px var(--sans);
   color: var(--ink);
   background: var(--paper);
   border: 2px solid var(--paper);
@@ -446,11 +448,11 @@ section[id] { scroll-margin-top: 104px; }
 .btn-yellow:hover { transform: translateY(-2px); }
 .btn-yellow:disabled { opacity: .6; cursor: default; transform: none; }
 .signup :focus-visible { outline-color: var(--yellow); }
-.signup-status { font-size: 15px; font-weight: 700; }
+.signup-status { font-size: 15px; font-weight: 600; }
 .signup-status:empty { margin-top: -24px; }
 .signup-status[data-kind="error"] { color: #ffb4a1; }
 .signup-status[data-kind="success"] { color: #a8e6c4; }
-.signup-small { max-width: 560px; font-size: 13px; line-height: 1.5; font-weight: 600; color: #cfc7b5; }
+.signup-small { max-width: 560px; font-size: 13px; line-height: 1.5; font-weight: 500; color: #cfc7b5; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .trap { position: absolute; left: -9999px; }
 
@@ -459,7 +461,7 @@ section[id] { scroll-margin-top: 104px; }
   margin-top: auto;
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   padding: 40px 8px 28px;
-  font-size: 14px; font-weight: 600;
+  font-size: 14px; font-weight: 500;
   color: var(--muted);
 }
 .footer-mark { width: 28px; height: 28px; flex-shrink: 0; }
@@ -521,7 +523,7 @@ section[id] { scroll-margin-top: 104px; }
 <section class="hero" id="top">
   <div class="hero-main">
     <div class="hero-copy">
-      <h1>Дом ведёт вся семья, а не один человек</h1>
+      <h1>Дом ведёт вся семья, а&nbsp;не один человек</h1>
       <p class="hero-lead">ЛАД — Личный Администратор Дома. Меню на неделю, покупки и домашние дела собраны на одной доске: видно, кто что делает и сколько времени на это уходит.</p>
     </div>
     <div class="hero-actions">
@@ -565,7 +567,7 @@ section[id] { scroll-margin-top: 104px; }
   <div class="section-head">
     <div>
       <div class="eyebrow">Зачем ЛАД</div>
-      <h2 class="h2 h2-wide">Дом — больше не в одной голове</h2>
+      <h2 class="h2 h2-wide">Дом&nbsp;— больше не&nbsp;в&nbsp;одной голове</h2>
     </div>
     <p class="lead">В каждой семье есть человек, который помнит всё: что купить, что приготовить, когда менять фильтр. ЛАД раскладывает это на всю семью.</p>
   </div>
@@ -681,7 +683,7 @@ section[id] { scroll-margin-top: 104px; }
   </div>
   <div class="feature-text bg-blue">
     <div class="eyebrow">03 · Дом</div>
-    <h2 class="h2">По графику, а не по аварии</h2>
+    <h2 class="h2">По графику, а&nbsp;не&nbsp;по&nbsp;аварии</h2>
     <ul class="checks">
       <li>Уборка, стирка, мусор: повседневные дела разложены по дням и людям на доске недели</li>
       <li>Фильтры, счётчики, котёл: редкие дела не теряются — задайте график один раз, и ЛАД одним нажатием соберёт дела на неделю</li>
@@ -738,7 +740,7 @@ section[id] { scroll-margin-top: 104px; }
   </div>
   <div class="faq-list">
     <div class="faq-item">
-      <h3>Это приложение или сайт?</h3>
+      <h3>Это приложение или&nbsp;сайт?</h3>
       <p>Сайт. Открывается в браузере на телефоне и на компьютере, устанавливать ничего не нужно.</p>
     </div>
     <div class="faq-item">
@@ -759,7 +761,7 @@ section[id] { scroll-margin-top: 104px; }
 <section class="signup" id="signup">
   <div class="blob blob-yellow" aria-hidden="true"></div>
   <div class="blob blob-lilac" aria-hidden="true"></div>
-  <h2 class="h2 h2-wide">Станьте одной из первых семей в ЛАД</h2>
+  <h2 class="h2 h2-wide">Станьте одной из&nbsp;первых семей в&nbsp;ЛАД</h2>
   <p class="lead">Оставьте почту — напишем, когда откроем доступ, и поможем завести дом.</p>
   <form class="signup-form" id="signup-form" novalidate>
     <label class="visually-hidden" for="email">Электронная почта</label>
