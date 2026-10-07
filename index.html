@@ -129,28 +129,36 @@ section[id] { scroll-margin-top: 104px; }
 /* ── Первый экран ──────────────────────────────────── */
 .hero {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
   gap: 24px;
   padding-top: 48px;
 }
 .hero-main {
-  display: flex; flex-direction: column; justify-content: space-between; gap: 40px;
-  min-height: 520px;
-  padding: clamp(32px, 5vw, 56px);
+  --pad: clamp(28px, 4vw, 48px);
+  position: relative; overflow: hidden; min-width: 0;
+  display: flex; flex-direction: column; gap: 28px;
+  padding: var(--pad) var(--pad) 0;
   background: var(--yellow);
   border: 2px solid var(--ink);
   border-radius: 32px;
   box-shadow: 8px 8px 0 var(--ink);
 }
-.hero-copy { display: flex; flex-direction: column; gap: 24px; }
+.hero-copy { display: flex; flex-direction: column; gap: 22px; }
 .hero h1 {
   font-family: var(--display); font-weight: 700;
-  font-size: clamp(32px, 4.3vw, 56px);
-  line-height: 1.1; letter-spacing: -0.01em;
+  font-size: clamp(34px, 4.1vw, 54px);
+  line-height: 1.06; letter-spacing: -0.02em;
   text-wrap: balance;
 }
-.hero-lead { font-size: 18px; line-height: 1.6; font-weight: 500; max-width: 540px; text-wrap: pretty; }
-.hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.hero-lead { font-size: 18px; line-height: 1.55; font-weight: 500; max-width: 520px; text-wrap: pretty; }
+.hero-actions { display: flex; gap: 16px 20px; align-items: center; flex-wrap: wrap; }
+.btn-large span { margin-left: 6px; }
+.hero-art {
+  display: block;
+  width: calc(100% + 2 * var(--pad)); max-width: none; height: auto;
+  margin: auto calc(-1 * var(--pad)) 0;
+  pointer-events: none;
+}
 .link-arrow {
   display: inline-flex; align-items: center; gap: 8px;
   padding-bottom: 2px;
@@ -161,28 +169,55 @@ section[id] { scroll-margin-top: 104px; }
 }
 .link-arrow:hover { gap: 14px; }
 
-.pillars { display: flex; flex-direction: column; gap: 16px; }
+.pillars { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .pillar {
+  --accent: var(--ink);
+  position: relative; overflow: hidden; min-width: 0;
   flex-grow: 1;
-  display: flex; gap: 18px; align-items: center;
-  padding: 24px 26px;
+  display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px 16px; align-items: start;
+  padding: 24px 40% 24px 24px;
   border: 2px solid var(--ink);
-  border-radius: 24px;
+  border-radius: 28px;
   text-decoration: none;
   transition: transform .15s, box-shadow .15s;
 }
 .pillar:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--ink); }
 .pillar-icon {
-  width: 56px; height: 56px; flex-shrink: 0;
+  width: 56px; height: 56px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 50%;
-  background: var(--paper);
-  border: 2px solid var(--ink);
+  background: var(--white);
+  border: 2px solid var(--accent);
+  color: var(--accent);
 }
-.pillar-text { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
-.pillar-title { font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.2; }
-.pillar-text p { font-size: 15px; line-height: 1.5; font-weight: 500; }
-.pillar-arrow { font-size: 22px; font-weight: 600; }
+.pillar-text { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; }
+.pillar-label { font-size: 16px; font-weight: 600; line-height: 1; color: var(--accent); }
+.pillar-title {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(18px, 1.6vw, 21px); line-height: 1.2; letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.pillar-desc { font-size: 15px; line-height: 1.5; font-weight: 500; color: var(--body); text-wrap: pretty; }
+.pillar-art {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 38%; height: 100%;
+  object-fit: contain; object-position: right center;
+  pointer-events: none;
+}
+.pillar-arrow {
+  position: absolute; right: 18px; bottom: 18px;
+  width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 2px 10px rgba(43, 38, 33, .08);
+  font-size: 22px; font-weight: 600; color: var(--ink);
+  transition: transform .15s;
+}
+.pillar:hover .pillar-arrow { transform: translateX(3px); }
+.pillar-kitchen { --accent: #c94a2a; background: #fde3d6; }
+.pillar-home { --accent: #2a62b8; background: #d4e9fd; }
+.pillar-family { --accent: #7b57be; background: #e7dffc; }
 .bg-peach { background: var(--peach); }
 .bg-blue { background: var(--blue); }
 .bg-lilac { background: var(--lilac); }
@@ -220,23 +255,53 @@ section[id] { scroll-margin-top: 104px; }
 
 /* ── Зачем ЛАД ─────────────────────────────────────── */
 .why { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
-.compare { overflow: hidden; background: var(--white); border: 2px solid var(--ink); border-radius: 24px; }
+.why .section-head > div { flex: 1 1 480px; max-width: 640px; }
+.why .section-head .h2 { font-size: clamp(26px, 2.8vw, 36px); line-height: 1.15; }
+.why .section-head .lead { flex: 0 1 480px; max-width: 480px; font-size: 18px; font-weight: 400; }
+.hl {
+  background: var(--yellow-soft); color: inherit;
+  font-weight: 600;
+  padding: 1px 5px; border-radius: 6px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.compare-wrap { display: flex; flex-direction: column; gap: 16px; }
+.compare { overflow: hidden; background: #fafbfb; border: 2px solid var(--ink); border-radius: 24px; }
 .compare-head, .compare-row { display: grid; grid-template-columns: 1fr 1fr; }
-.compare-head { background: var(--paper); border-bottom: 2px solid var(--ink); }
-.compare-head span { padding: 14px 28px; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.compare-head span:last-child { color: var(--ink); }
-.compare-row + .compare-row { border-top: 1.5px solid var(--line); }
-.was { padding: 22px 28px; font-family: var(--sans); font-weight: 400; font-size: 20px; line-height: 1.3; color: var(--body); text-wrap: pretty; }
-.now { display: flex; gap: 12px; padding: 22px 28px; background: var(--cream); border-left: 1.5px solid var(--line); font-size: 16px; line-height: 1.55; font-weight: 500; }
-.now::before {
-  content: "✓";
-  width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px;
+.compare-head { border-bottom: 2px solid var(--ink); }
+.compare-head span {
+  padding: 14px 28px;
+  background: #f3f3f3;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted);
+}
+.compare-head span:last-child { background: #fef0cc; color: var(--ink); }
+.compare-row + .compare-row { border-top: 1.5px solid #e9e6df; }
+.was, .now { display: flex; align-items: center; gap: 20px; padding: 16px 28px; min-height: 120px; }
+.was-art { width: 150px; height: auto; flex-shrink: 0; border-radius: 16px; }
+.cell-text { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.cell-text strong { font-size: 19px; font-weight: 700; line-height: 1.25; color: var(--ink); }
+.cell-text p { font-size: 15px; line-height: 1.5; font-weight: 400; color: var(--body); text-wrap: pretty; }
+.now { background: #fef9ee; border-left: 1.5px solid #e9e6df; }
+.now .cell-text { flex-grow: 1; }
+.check {
+  width: 34px; height: 34px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   border-radius: 50%;
   background: var(--yellow);
   border: 2px solid var(--ink);
-  font-size: 12px; font-weight: 600;
 }
+.now-art { width: 180px; height: auto; flex-shrink: 0; margin: -16px -12px -16px 0; }
+.why-note {
+  display: flex; align-items: center; gap: 28px;
+  overflow: hidden;
+  padding-right: 28px;
+  background: #ede8fd;
+  border: 2px solid #d9cdfb;
+  border-radius: 24px;
+}
+.why-note-art { height: 108px; width: auto; flex-shrink: 0; margin-left: 12px; }
+.why-note p { display: flex; flex-direction: column; gap: 4px; font-size: 19px; line-height: 1.35; color: #4b32b4; text-wrap: pretty; }
+.why-note strong { font-size: 20px; font-weight: 700; color: var(--ink); }
 
 /* ── Как работает ──────────────────────────────────── */
 .how { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
@@ -468,11 +533,33 @@ section[id] { scroll-margin-top: 104px; }
 .footer strong { font-family: var(--serif); font-weight: 400; font-size: 22px; color: var(--ink); }
 
 /* ── Узкие экраны ──────────────────────────────────── */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 900px) {
+  .was, .now { padding: 16px 20px; gap: 16px; }
+  .was-art { width: 120px; }
+  .now-art { width: 140px; margin-right: -8px; }
+}
 @media (max-width: 700px) {
   .compare-head { display: none; }
   .compare-row { grid-template-columns: 1fr; }
-  .was { padding: 20px 20px 12px; }
-  .now { padding: 12px 20px 20px; background: none; border-left: 0; }
+  .was { min-height: 0; padding-bottom: 12px; }
+  .now { min-height: 0; border-left: 0; }
+  .now-art { display: none; }
+  .why-note { flex-direction: column; align-items: stretch; gap: 16px; padding: 0; }
+  .why-note-art { width: 100%; height: auto; margin: 0; }
+  .why-note p { padding: 0 24px 24px; }
+}
+@media (max-width: 640px) {
+  .pillar { padding-right: 24px; padding-bottom: 0; }
+  .pillar-art {
+    position: static; grid-column: 1 / -1;
+    width: calc(100% + 48px); height: auto; max-height: 200px;
+    margin: 4px -24px 0;
+    object-position: center bottom;
+  }
+  .pillar-arrow { display: none; }
 }
 @media (max-width: 1080px) {
   .brand-tagline { display: none; }
@@ -482,7 +569,6 @@ section[id] { scroll-margin-top: 104px; }
 }
 @media (max-width: 900px) {
   .header { top: 8px; padding: 8px 8px 8px 14px; }
-  .hero-main { min-height: 0; }
 }
 @media (max-width: 520px) {
   .brand-tagline { display: none; }
@@ -523,28 +609,44 @@ section[id] { scroll-margin-top: 104px; }
 <section class="hero" id="top">
   <div class="hero-main">
     <div class="hero-copy">
-      <h1>Дом ведёт вся семья, а&nbsp;не один человек</h1>
-      <p class="hero-lead">ЛАД — Личный Администратор Дома. Меню на неделю, покупки и домашние дела собраны на одной доске: видно, кто что делает и сколько времени на это уходит.</p>
+      <h1>Дом, в&nbsp;котором всё ладится</h1>
+      <p class="hero-lead">ЛАД — личный администратор дома. Он помогает с&nbsp;меню и&nbsp;покупками, помнит домашние дела и&nbsp;распределяет их между всей семьёй.</p>
     </div>
     <div class="hero-actions">
-      <a class="btn btn-dark btn-large" href="#signup">Получить ранний доступ</a>
+      <a class="btn btn-dark btn-large" href="#signup">Получить ранний доступ<span aria-hidden="true">→</span></a>
       <a class="link-arrow" href="#how">Как это работает <span aria-hidden="true">→</span></a>
     </div>
+    <img class="hero-art" src="img/hero-room.png" alt="" width="774" height="466" fetchpriority="high">
   </div>
   <div class="pillars">
-    <a class="pillar bg-peach" href="#kitchen">
-      <span class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
-      <span class="pillar-text"><span class="pillar-title">Кухня</span><p>ИИ составляет меню на неделю с учётом предпочтений и аллергий каждого. Список покупок — с учётом того, что уже есть дома.</p></span>
+    <a class="pillar pillar-kitchen" href="#kitchen">
+      <span class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
+      <span class="pillar-text">
+        <span class="pillar-label">Кухня</span>
+        <span class="pillar-title">Что будем готовить?&nbsp;— решено.</span>
+        <span class="pillar-desc">ЛАД составляет меню под вашу семью и&nbsp;превращает его в&nbsp;список покупок. Учитывает предпочтения, аллергии и&nbsp;то, что уже есть дома.</span>
+      </span>
+      <img class="pillar-art" src="img/pillar-kitchen.png" alt="" width="342" height="264">
       <span class="pillar-arrow" aria-hidden="true">→</span>
     </a>
-    <a class="pillar bg-blue" href="#home">
-      <span class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-      <span class="pillar-text"><span class="pillar-title">Дом</span><p>Уборка, домашние дела, обслуживание дома, мастера, расходники и книга дома.</p></span>
+    <a class="pillar pillar-home" href="#home">
+      <span class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+      <span class="pillar-text">
+        <span class="pillar-label">Дом</span>
+        <span class="pillar-title">Что нужно сделать?&nbsp;— не&nbsp;забыто.</span>
+        <span class="pillar-desc">Уборка, обслуживание, расходники, мастера и&nbsp;дела, которые случаются раз в&nbsp;год. ЛАД всё помнит и&nbsp;помогает вовремя.</span>
+      </span>
+      <img class="pillar-art" src="img/pillar-home.png" alt="" width="307" height="252">
       <span class="pillar-arrow" aria-hidden="true">→</span>
     </a>
-    <a class="pillar bg-lilac" href="#family">
-      <span class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-      <span class="pillar-text"><span class="pillar-title">Семья</span><p>Баллы за дела считает ЛАД, а не мама. Серии и награды для детей.</p></span>
+    <a class="pillar pillar-family" href="#family">
+      <span class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+      <span class="pillar-text">
+        <span class="pillar-label">Семья</span>
+        <span class="pillar-title">Кто это сделает?&nbsp;— понятно.</span>
+        <span class="pillar-desc">ЛАД распределяет дела между всеми, считает вклад каждого и&nbsp;помогает превратить домашнюю рутину в&nbsp;общую игру.</span>
+      </span>
+      <img class="pillar-art" src="img/pillar-family.png" alt="" width="307" height="248">
       <span class="pillar-arrow" aria-hidden="true">→</span>
     </a>
   </div>
@@ -567,17 +669,73 @@ section[id] { scroll-margin-top: 104px; }
   <div class="section-head">
     <div>
       <div class="eyebrow">Зачем ЛАД</div>
-      <h2 class="h2 h2-wide">Дом&nbsp;— больше не&nbsp;в&nbsp;одной голове</h2>
+      <h2 class="h2 h2-wide">Всё, что раньше держалось в&nbsp;одной голове&nbsp;— теперь знает вся семья</h2>
     </div>
-    <p class="lead">В каждой семье есть человек, который помнит всё: что купить, что приготовить, когда менять фильтр. ЛАД раскладывает это на всю семью.</p>
+    <p class="lead">В каждой семье есть человек, который помнит всё: что купить, что приготовить, когда менять фильтр, кто вызовет мастера и&nbsp;что должны сделать дети. ЛАД превращает эту <mark class="hl">невидимую нагрузку в&nbsp;общую систему.</mark></p>
   </div>
-  <div class="compare">
-    <div class="compare-head" aria-hidden="true"><span>Сейчас</span><span>С ЛАД</span></div>
-    <div class="compare-row"><p class="was"><span class="visually-hidden">Сейчас: </span>«Что на ужин?» — каждый вечер, и решает всегда один человек</p><p class="now"><span><span class="visually-hidden">С ЛАД: </span>ИИ составляет меню на неделю из ваших рецептов, с учётом предпочтений и аллергий каждого</span></p></div>
-    <div class="compare-row"><p class="was"><span class="visually-hidden">Сейчас: </span>«Купи что-нибудь» — и дома уже третья пачка гречки</p><p class="now"><span><span class="visually-hidden">С ЛАД: </span>Список покупок собирается из меню — без того, что уже есть дома</span></p></div>
-    <div class="compare-row"><p class="was"><span class="visually-hidden">Сейчас: </span>«Почему опять я?» — уборка, стирка и готовка на одном человеке</p><p class="now"><span><span class="visually-hidden">С ЛАД: </span>Дела разложены по людям и дням. Видно, кто сколько сделал и сколько времени потратил</span></p></div>
-    <div class="compare-row"><p class="was"><span class="visually-hidden">Сейчас: </span>Детей приходится просить по пять раз</p><p class="now"><span><span class="visually-hidden">С ЛАД: </span>Дела приносят баллы, а баллы меняются на награды — у детей появляется причина участвовать</span></p></div>
-    <div class="compare-row"><p class="was"><span class="visually-hidden">Сейчас: </span>Где перекрыть воду и как зовут сантехника, знает один человек</p><p class="now"><span><span class="visually-hidden">С ЛАД: </span>Это записано в книге дома и в списке мастеров — и доступно всей семье</span></p></div>
+  <div class="compare-wrap">
+    <div class="compare">
+      <div class="compare-head" aria-hidden="true"><span>Сейчас</span><span>С ЛАД</span></div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-1.png" alt="" width="169" height="107" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Что на ужин?»</strong><p>Каждый вечер один человек решает, что приготовить.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Меню уже есть.</strong><p>ЛАД составляет меню на неделю с&nbsp;учётом вкусов, аллергий и&nbsp;предпочтений всей семьи.</p></div>
+          <img class="now-art" src="img/lad-1.png" alt="" width="234" height="118" loading="lazy">
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-2.png" alt="" width="169" height="94" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Купи что-нибудь»</strong><p>А дома уже третья пачка гречки.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Покупки связаны с&nbsp;меню.</strong><p>В список попадает только то, чего действительно не&nbsp;хватает.</p></div>
+          <img class="now-art" src="img/lad-2.png" alt="" width="234" height="115" loading="lazy">
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-3.png" alt="" width="169" height="95" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Почему опять я?»</strong><p>Уборка, стирка и&nbsp;готовка снова на&nbsp;одном человеке.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Все знают свои задачи.</strong><p>ЛАД распределяет дела между членами семьи и&nbsp;показывает вклад каждого.</p></div>
+          <img class="now-art" src="img/lad-3.png" alt="" width="234" height="115" loading="lazy">
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-4.png" alt="" width="169" height="90" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Сколько раз ещё просить?»</strong><p>Дети забывают свои дела.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Помнить не&nbsp;нужно.</strong><p>Дела превращаются в&nbsp;баллы, серии и&nbsp;семейные награды.</p></div>
+          <img class="now-art" src="img/lad-4.png" alt="" width="234" height="99" loading="lazy">
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-5.png" alt="" width="169" height="95" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Где перекрыть воду?»</strong><p>Знает только один человек. И&nbsp;как зовут сантехника тоже.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Знания дома доступны всем.</strong><p>Инструкции, контакты мастеров и&nbsp;важная информация&nbsp;— в&nbsp;книге дома.</p></div>
+          <img class="now-art" src="img/lad-5.png" alt="" width="234" height="111" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="why-note">
+      <img class="why-note-art" src="img/family-banner.png" alt="" width="325" height="103" loading="lazy">
+      <p><strong>ЛАД не&nbsp;заставляет семью делать больше.</strong><span>Он помогает одному человеку больше не&nbsp;делать всё самому.</span></p>
+    </div>
   </div>
 </section>
 
