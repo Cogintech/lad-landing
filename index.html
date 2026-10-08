@@ -105,9 +105,12 @@ section[id] { scroll-margin-top: 104px; }
 
 /* ── Общие элементы ────────────────────────────────── */
 .eyebrow {
-  font-size: 13px; font-weight: 600;
+  grid-column: 1 / -1;
+  margin-bottom: -12px;
+  font-size: clamp(18px, 1.8vw, 24px); font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted);
+  text-align: center;
 }
 .h2 {
   font-family: var(--display); font-weight: 700;
@@ -224,7 +227,7 @@ section[id] { scroll-margin-top: 104px; }
 
 /* ── Доска недели ──────────────────────────────────── */
 .board {
-  margin-top: 32px;
+  grid-column: 1 / -1;
   display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
   padding: 20px 24px;
   background: var(--white);
@@ -652,23 +655,10 @@ section[id] { scroll-margin-top: 104px; }
   </div>
 </section>
 
-<section class="board" aria-label="Пример доски недели">
-  <div class="board-title">
-    <strong>Доска недели</strong>
-    <span>Кто, что, сколько баллов и времени</span>
-  </div>
-  <div class="board-people">
-    <div class="person" style="background:#fff3e8"><span class="avatar" style="background:#ffb46b" aria-hidden="true">М</span><span class="person-text"><span class="person-top"><strong>Мама</strong><b>14 баллов</b></span><span class="person-top"><span class="person-task">Ужин · курица</span><span class="person-time">45 мин</span></span></span></div>
-    <div class="person" style="background:#eaf3ff"><span class="avatar" style="background:#8fc3ff" aria-hidden="true">П</span><span class="person-text"><span class="person-top"><strong>Папа</strong><b>15 баллов</b></span><span class="person-top"><span class="person-task">Закупка</span><span class="person-time">50 мин</span></span></span></div>
-    <div class="person" style="background:#f3edff"><span class="avatar" style="background:#c8b4ff" aria-hidden="true">А</span><span class="person-text"><span class="person-top"><strong>Алиса</strong><b>6 баллов</b></span><span class="person-top"><span class="person-task">Пропылесосить</span><span class="person-time">15 мин</span></span></span></div>
-    <div class="person" style="background:#e6f6ee"><span class="avatar" style="background:#8fe0b8" aria-hidden="true">С</span><span class="person-text"><span class="person-top"><strong>Сергей</strong><b>11 баллов</b></span><span class="person-top"><span class="person-task">Фильтры воды</span><span class="person-time">10 мин</span></span></span></div>
-  </div>
-</section>
-
 <section class="why" id="why">
+  <div class="eyebrow">Зачем ЛАД</div>
   <div class="section-head">
     <div>
-      <div class="eyebrow">Зачем ЛАД</div>
       <h2 class="h2 h2-wide">Всё, что раньше держалось в&nbsp;одной голове&nbsp;— теперь знает вся семья</h2>
     </div>
     <p class="lead">В каждой семье есть человек, который помнит всё: что купить, что приготовить, когда менять фильтр, кто вызовет мастера и&nbsp;что должны сделать дети. ЛАД превращает эту <mark class="hl">невидимую нагрузку в&nbsp;общую систему.</mark></p>
@@ -740,9 +730,9 @@ section[id] { scroll-margin-top: 104px; }
 </section>
 
 <section class="how" id="how">
+  <div class="eyebrow">01 · Как работает</div>
   <div class="section-head">
     <div>
-      <div class="eyebrow">01 · Как работает</div>
       <h2 class="h2 h2-wide">Одна цепочка вместо четырёх приложений</h2>
     </div>
     <p class="lead">Меню превращается в список покупок, покупки пополняют кладовую, кладовая подсказывает, что готовить, а готовка становится задачей на общей доске.</p>
@@ -784,8 +774,8 @@ section[id] { scroll-margin-top: 104px; }
 </section>
 
 <section class="feature feature-first" id="kitchen">
+  <div class="eyebrow">02 · Кухня</div>
   <div class="feature-text bg-peach">
-    <div class="eyebrow">02 · Кухня</div>
     <h2 class="h2">Вечерний вопрос «что готовить» исчезает</h2>
     <ul class="checks">
       <li>ИИ составляет меню на неделю из ваших рецептов — с учётом предпочтений, диет и аллергий каждого в семье. Можно собрать и вручную</li>
@@ -818,6 +808,7 @@ section[id] { scroll-margin-top: 104px; }
 </section>
 
 <section class="feature" id="home">
+  <div class="eyebrow">03 · Дом</div>
   <div class="mock" role="img" aria-label="Пример: список домашних дел — от ежедневной уборки до редкого обслуживания — и запись из книги дома">
     <div class="mock-bar">
       <div class="mock-title"><span class="dots"><i></i><i></i><i></i></span>Дела по дому</div>
@@ -840,7 +831,6 @@ section[id] { scroll-margin-top: 104px; }
     </div>
   </div>
   <div class="feature-text bg-blue">
-    <div class="eyebrow">03 · Дом</div>
     <h2 class="h2">По графику, а&nbsp;не&nbsp;по&nbsp;аварии</h2>
     <ul class="checks">
       <li>Уборка, стирка, мусор: повседневные дела разложены по дням и людям на доске недели</li>
@@ -853,8 +843,8 @@ section[id] { scroll-margin-top: 104px; }
 </section>
 
 <section class="feature" id="family">
+  <div class="eyebrow">04 · Семья</div>
   <div class="feature-text bg-lilac">
-    <div class="eyebrow">04 · Семья</div>
     <h2 class="h2">Спор «кто больше делает» закрыт</h2>
     <ul class="checks">
       <li>Роли: владелец, взрослый, подросток, помощник — у каждого свои права</li>
@@ -887,12 +877,24 @@ section[id] { scroll-margin-top: 104px; }
       </div>
     </div>
   </div>
+  <div class="board" aria-label="Пример доски недели">
+    <div class="board-title">
+      <strong>Доска недели</strong>
+      <span>Кто, что, сколько баллов и времени</span>
+    </div>
+    <div class="board-people">
+      <div class="person" style="background:#fff3e8"><span class="avatar" style="background:#ffb46b" aria-hidden="true">М</span><span class="person-text"><span class="person-top"><strong>Мама</strong><b>14 баллов</b></span><span class="person-top"><span class="person-task">Ужин · курица</span><span class="person-time">45 мин</span></span></span></div>
+      <div class="person" style="background:#eaf3ff"><span class="avatar" style="background:#8fc3ff" aria-hidden="true">П</span><span class="person-text"><span class="person-top"><strong>Папа</strong><b>15 баллов</b></span><span class="person-top"><span class="person-task">Закупка</span><span class="person-time">50 мин</span></span></span></div>
+      <div class="person" style="background:#f3edff"><span class="avatar" style="background:#c8b4ff" aria-hidden="true">А</span><span class="person-text"><span class="person-top"><strong>Алиса</strong><b>6 баллов</b></span><span class="person-top"><span class="person-task">Пропылесосить</span><span class="person-time">15 мин</span></span></span></div>
+      <div class="person" style="background:#e6f6ee"><span class="avatar" style="background:#8fe0b8" aria-hidden="true">С</span><span class="person-text"><span class="person-top"><strong>Сергей</strong><b>11 баллов</b></span><span class="person-top"><span class="person-task">Фильтры воды</span><span class="person-time">10 мин</span></span></span></div>
+    </div>
+  </div>
 </section>
 
 <section class="faq" id="faq">
+  <div class="eyebrow">05 · Вопросы</div>
   <div class="section-head">
     <div>
-      <div class="eyebrow">05 · Вопросы</div>
       <h2 class="h2 h2-wide">Что обычно спрашивают</h2>
     </div>
   </div>
