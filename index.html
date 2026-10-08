@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ЛАД — Дом, в котором всё ладится</title>
-<meta name="description" content="Дом не должен держаться в одной голове. ЛАД помнит бытовые дела, помогает с меню и покупками и распределяет задачи между всей семьёй. Бесплатный ранний доступ для первых 50 семей.">
+<title>ЛАД — Личный Администратор Дома</title>
+<meta name="description" content="Дом, в котором всё ладится. Меню, покупки и дела по дому — в одном месте и на всю семью. Открыта запись на ранний доступ.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="ЛАД — Дом, в котором всё ладится">
-<meta property="og:description" content="ЛАД помнит бытовые дела, помогает с меню и покупками и распределяет задачи между всей семьёй. Бесплатный ранний доступ для первых 50 семей.">
+<meta property="og:title" content="ЛАД — Личный Администратор Дома">
+<meta property="og:description" content="Дом, в котором всё ладится. Меню, покупки и дела по дому — в одном месте и на всю семью. Открыта запись на ранний доступ.">
 <meta name="theme-color" content="#ffd66b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' rx='40' fill='%23ffd66b'/%3E%3Cpath d='M30 134V76L80 30l50 46v58z' fill='%232b2621'/%3E%3Cpath d='M56 90l18 18 36-40' fill='none' stroke='%23ffd66b' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,6 @@
   --mint: #e6f6ee;
   --green: #2f6b52;
   --red: #a4462b;
-  --shadow-soft: 0 18px 50px rgba(43, 38, 33, .10);
   --serif: 'Gloock', Georgia, serif;
   --display: 'Unbounded', system-ui, sans-serif;
   --sans: 'Rubik', system-ui, sans-serif;
@@ -98,23 +97,21 @@ section[id] { scroll-margin-top: 104px; }
   cursor: pointer;
   transition: transform .15s, box-shadow .15s, background .15s;
 }
-.btn-dark { background: var(--ink); color: var(--paper); border: 2px solid var(--ink); }
+.btn-dark { background: var(--ink); color: var(--paper); border: 0; }
 .btn-dark:hover { background: #000; transform: translateY(-2px); }
 .btn-small { font-size: 15px; padding: 10px 20px; }
-.btn-large { font-size: 17px; padding: 18px 30px; }
-.btn-yellow { background: var(--yellow); color: var(--ink); border: 2px solid var(--ink); }
-.btn-yellow:hover { transform: translateY(-2px); }
-.btn-yellow:disabled { opacity: .6; cursor: default; transform: none; }
+.btn-large { font-size: 17px; padding: 18px 30px; box-shadow: 4px 4px 0 var(--paper); }
+.btn-large:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--paper); }
 
 /* ── Общие элементы ────────────────────────────────── */
-.section { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
 .eyebrow {
-  font-size: clamp(16px, 1.6vw, 20px); font-weight: 600;
+  grid-column: 1 / -1;
+  margin-bottom: -12px;
+  font-size: clamp(18px, 1.8vw, 24px); font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted);
   text-align: center;
 }
-.section > .eyebrow { margin-bottom: -16px; }
 .h2 {
   font-family: var(--display); font-weight: 700;
   font-size: clamp(26px, 2.8vw, 36px);
@@ -123,80 +120,48 @@ section[id] { scroll-margin-top: 104px; }
 }
 .h2-wide { font-size: clamp(28px, 3.3vw, 42px); line-height: 1.1; }
 .lead { font-size: 17px; line-height: 1.6; font-weight: 500; color: var(--body); text-wrap: pretty; }
+
 .section-head {
   display: flex; align-items: flex-end; justify-content: space-between;
   gap: 24px 48px; flex-wrap: wrap;
   padding: 0 8px;
 }
-.section-head > div { display: flex; flex-direction: column; gap: 14px; flex: 1 1 480px; max-width: 680px; }
-.section-head > .lead { flex: 0 1 440px; max-width: 440px; }
-.section-head .lead { font-size: 18px; font-weight: 400; }
-.section-head-center { flex-direction: column; align-items: center; text-align: center; }
-.section-head-center > div { align-items: center; flex: 0 0 auto; }
-.hl {
-  background: var(--yellow-soft); color: inherit;
-  font-weight: 600;
-  padding: 1px 5px; border-radius: 6px;
-  -webkit-box-decoration-break: clone; box-decoration-break: clone;
-}
-.result {
-  display: flex; align-items: center; gap: 12px;
-  font-family: var(--display); font-weight: 500;
-  font-size: clamp(16px, 1.5vw, 19px); line-height: 1.3;
-  text-wrap: balance;
-}
-.result::before {
-  content: "";
-  width: 28px; height: 4px; flex-shrink: 0;
-  border-radius: 2px; background: var(--ink);
-}
+.section-head > div { display: flex; flex-direction: column; gap: 14px; max-width: 720px; }
+.section-head .lead { max-width: 400px; }
 
 /* ── Первый экран ──────────────────────────────────── */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
   gap: 24px;
-  align-items: stretch;
   padding-top: 48px;
 }
 .hero-main {
   --pad: clamp(28px, 4vw, 48px);
-  position: relative; min-width: 0;
-  overflow: hidden;
-  display: flex; flex-direction: column; gap: 30px;
+  position: relative; overflow: hidden; min-width: 0;
+  display: flex; flex-direction: column; gap: 28px;
   padding: var(--pad) var(--pad) 0;
   background: var(--yellow);
   border: 2px solid var(--ink);
   border-radius: 32px;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
 }
 .hero-copy { display: flex; flex-direction: column; gap: 22px; }
-.hero-tagline {
-  grid-column: 1 / -1;
-  margin-bottom: 8px;
-  padding: 0 8px;
+.hero h1 {
   font-family: var(--display); font-weight: 700;
-  font-size: clamp(34px, 4.2vw, 56px);
-  line-height: 1.05; letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-.hero-title {
-  font-family: var(--display); font-weight: 700;
-  font-size: clamp(28px, 3vw, 40px);
-  line-height: 1.08; letter-spacing: -0.02em;
+  font-size: clamp(34px, 4.1vw, 54px);
+  line-height: 1.06; letter-spacing: -0.02em;
   text-wrap: balance;
 }
 .hero-lead { font-size: 18px; line-height: 1.55; font-weight: 500; max-width: 520px; text-wrap: pretty; }
-.hero-actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-.hero-actions-row { display: flex; gap: 16px 24px; align-items: center; flex-wrap: wrap; }
-.hero-meta { font-size: 14px; font-weight: 600; color: var(--body); }
+.hero-actions { display: flex; gap: 16px 20px; align-items: center; flex-wrap: wrap; }
+.btn-large span { margin-left: 6px; }
 .hero-art {
   display: block;
   width: calc(100% + 2 * var(--pad)); max-width: none; height: auto;
   margin: auto calc(-1 * var(--pad)) 0;
   pointer-events: none;
 }
-.btn-large span { margin-left: 6px; }
 .link-arrow {
   display: inline-flex; align-items: center; gap: 8px;
   padding-bottom: 2px;
@@ -207,7 +172,6 @@ section[id] { scroll-margin-top: 104px; }
 }
 .link-arrow:hover { gap: 14px; }
 
-/* ── Три области дома ──────────────────────────────── */
 .pillars { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .pillar {
   --accent: var(--ink);
@@ -257,59 +221,54 @@ section[id] { scroll-margin-top: 104px; }
 .pillar-kitchen { --accent: #c94a2a; background: #fde3d6; }
 .pillar-home { --accent: #2a62b8; background: #d4e9fd; }
 .pillar-family { --accent: #7b57be; background: #e7dffc; }
+.bg-peach { background: var(--peach); }
+.bg-blue { background: var(--blue); }
+.bg-lilac { background: var(--lilac); }
 
-/* ── Общие детали макетов ──────────────────────────── */
-.mock-bar {
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
-  padding: 14px 20px;
-  background: var(--paper);
-  border-bottom: 2px solid var(--ink);
-}
-.mock-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; white-space: nowrap; }
-.dots { display: flex; gap: 5px; }
-.dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink); }
-.dots i:first-child { background: var(--ink); }
-.tag { flex-shrink: 0; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 999px; background: var(--mint); white-space: nowrap; }
-.tag-cream { background: var(--cream); }
-.box { width: 18px; height: 18px; flex-shrink: 0; border-radius: 6px; border: 1.5px solid var(--ink); }
-.who { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; }
-.mini-avatar {
-  width: 22px; height: 22px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-  border: 1.5px solid var(--ink);
-  font-size: 10px; font-weight: 600; color: var(--ink);
-}
-.note {
-  display: flex; gap: 10px; align-items: center;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1.5px solid var(--ink);
-  font-size: 13px; font-weight: 500;
-}
-.note svg { flex-shrink: 0; }
-.note-dashed { margin-top: auto; background: var(--cream); border-style: dashed; }
-
-/* ── Зачем ЛАД ─────────────────────────────────────── */
-.thoughts {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px;
-  padding: 0 8px;
-}
-.thought {
-  padding: 14px 22px;
-  border-radius: 999px;
+/* ── Доска недели ──────────────────────────────────── */
+.board {
+  grid-column: 1 / -1;
+  display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+  padding: 20px 24px;
   background: var(--white);
   border: 2px solid var(--ink);
-  font-family: var(--display); font-weight: 500;
-  font-size: clamp(14px, 1.5vw, 18px); line-height: 1.2;
-  white-space: nowrap;
+  border-radius: 24px;
 }
-.thought:nth-child(odd) { transform: rotate(-1.2deg); }
-.thought:nth-child(even) { transform: rotate(1deg); }
-.turn { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
-.turn-arrow { width: 2px; height: 40px; background: var(--ink); }
-.turn .h2 { max-width: 760px; }
-.compare { overflow: hidden; background: var(--white); border: 2px solid var(--ink); border-radius: 24px; }
+.board-title { display: flex; flex-direction: column; gap: 4px; min-width: 180px; }
+.board-title strong { font-family: var(--display); font-weight: 500; font-size: 18px; }
+.board-title span { font-size: 13px; font-weight: 600; color: var(--muted); }
+.board-people {
+  flex: 1 1 600px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;
+}
+.person { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 16px; }
+.avatar {
+  width: 44px; height: 44px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  font-weight: 600; font-size: 14px;
+}
+.person-text { flex-grow: 1; display: flex; flex-direction: column; }
+.person-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.person-top strong { font-size: 14px; font-weight: 600; }
+.person-top b { font-size: 12px; font-weight: 600; white-space: nowrap; }
+.person-task { font-size: 11px; font-weight: 500; color: var(--muted); }
+.person-time { font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+
+/* ── Зачем ЛАД ─────────────────────────────────────── */
+.why { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
+.why .section-head > div { flex: 1 1 480px; max-width: 640px; }
+.why .section-head .h2 { font-size: clamp(26px, 2.8vw, 36px); line-height: 1.15; }
+.why .section-head .lead { flex: 0 1 480px; max-width: 480px; font-size: 18px; font-weight: 400; }
+.hl {
+  background: var(--yellow-soft); color: inherit;
+  font-weight: 600;
+  padding: 1px 5px; border-radius: 6px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.compare-wrap { display: flex; flex-direction: column; gap: 16px; }
+.compare { overflow: hidden; background: #fafbfb; border: 2px solid var(--ink); border-radius: 24px; }
 .compare-head, .compare-row { display: grid; grid-template-columns: 1fr 1fr; }
 .compare-head { border-bottom: 2px solid var(--ink); }
 .compare-head span {
@@ -319,19 +278,14 @@ section[id] { scroll-margin-top: 104px; }
   color: var(--muted);
 }
 .compare-head span:last-child { background: #fef0cc; color: var(--ink); }
-.compare-row + .compare-row { border-top: 1.5px solid var(--line); }
-.was, .now { display: flex; align-items: center; gap: 18px; padding: 22px 28px; }
-.was-mark {
-  width: 34px; height: 34px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-  border: 2px solid var(--line);
-  font-family: var(--serif); font-size: 20px; color: var(--muted);
-}
+.compare-row + .compare-row { border-top: 1.5px solid #e9e6df; }
+.was, .now { display: flex; align-items: center; gap: 20px; padding: 16px 28px; min-height: 120px; }
+.was-art { width: 150px; height: auto; flex-shrink: 0; border-radius: 16px; }
 .cell-text { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .cell-text strong { font-size: 19px; font-weight: 700; line-height: 1.25; color: var(--ink); }
 .cell-text p { font-size: 15px; line-height: 1.5; font-weight: 400; color: var(--body); text-wrap: pretty; }
-.now { background: #fef9ee; border-left: 1.5px solid var(--line); }
+.now { background: #fef9ee; border-left: 1.5px solid #e9e6df; }
+.now .cell-text { flex-grow: 1; }
 .check {
   width: 34px; height: 34px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
@@ -339,31 +293,63 @@ section[id] { scroll-margin-top: 104px; }
   background: var(--yellow);
   border: 2px solid var(--ink);
 }
+.now-art { width: 180px; height: auto; flex-shrink: 0; margin: -16px -12px -16px 0; }
+.why-note {
+  display: flex; align-items: center; gap: 28px;
+  overflow: hidden;
+  padding-right: 28px;
+  background: #ede8fd;
+  border: 2px solid #d9cdfb;
+  border-radius: 24px;
+}
+.why-note-art { height: 108px; width: auto; flex-shrink: 0; margin-left: 12px; }
+.why-note p { display: flex; flex-direction: column; gap: 4px; font-size: 19px; line-height: 1.35; color: #4b32b4; text-wrap: pretty; }
+.why-note strong { font-size: 20px; font-weight: 700; color: var(--ink); }
 
-/* ── Помнит · Решает · Распределяет ────────────────── */
-.verbs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
-.verb {
+/* ── Как работает ──────────────────────────────────── */
+.how { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.step {
   display: flex; flex-direction: column; gap: 14px;
-  padding: 32px 28px;
+  padding: 28px;
+  background: var(--white);
+  border-radius: 24px;
+}
+.step-num {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  font-family: var(--display); font-weight: 500; font-size: 18px;
+}
+.step h3 { font-family: var(--display); font-weight: 500; font-size: 21px; line-height: 1.2; }
+.step p { font-size: 16px; line-height: 1.6; font-weight: 500; color: var(--body); }
+
+/* ── Ранний доступ ──────────────────────────────────── */
+.beta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 24px; align-items: center;
+  padding-top: 96px;
+}
+.beta-copy { display: flex; flex-direction: column; gap: 20px; padding: 0 8px; }
+.beta-copy h2 {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(22px, 2.2vw, 28px); line-height: 1.25;
+  text-wrap: pretty;
+}
+.beta-copy p { max-width: 520px; }
+.facts { display: flex; flex-wrap: wrap; gap: 16px; }
+.fact {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 22px 20px;
   background: var(--white);
   border: 2px solid var(--ink);
-  border-radius: 28px;
+  border-radius: 20px;
+  flex: 1 1 150px;
 }
-.verb h3 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; letter-spacing: -0.01em; }
-.verb p { font-size: 16px; line-height: 1.55; font-weight: 500; color: var(--body); text-wrap: pretty; }
-.verb-ui { margin-top: auto; padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
-.verb-ui span {
-  display: flex; justify-content: space-between; gap: 10px;
-  padding: 9px 12px;
-  border-radius: 12px;
-  border: 1.5px solid var(--line);
-  font-size: 13px; font-weight: 500;
-}
-.verb-ui b { font-weight: 600; color: var(--muted); white-space: nowrap; }
-.verb-remember { background: var(--blue); }
-.verb-decide { background: var(--peach); }
-.verb-share { background: var(--lilac); }
-.verb-remember .verb-ui span, .verb-decide .verb-ui span, .verb-share .verb-ui span { background: var(--white); }
+.fact strong { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+.fact span { font-size: 13px; font-weight: 600; color: var(--muted); }
 
 /* ── Разделы: текст + макет ────────────────────────── */
 .feature {
@@ -378,13 +364,8 @@ section[id] { scroll-margin-top: 104px; }
   padding: clamp(28px, 4vw, 48px);
   border: 2px solid var(--ink);
   border-radius: 32px;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
 }
-.feature-text .eyebrow { text-align: left; font-size: 14px; }
-.feature-text .result { margin-top: 6px; }
-.bg-peach { background: var(--peach); }
-.bg-blue { background: var(--blue); }
-.bg-lilac { background: var(--lilac); }
 .checks { display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.55; font-weight: 500; }
 .checks li { display: flex; gap: 12px; }
 .checks li::before {
@@ -398,32 +379,50 @@ section[id] { scroll-margin-top: 104px; }
 }
 
 .mock {
-  display: flex; flex-direction: column; min-width: 0;
+  display: flex; flex-direction: column;
   overflow: hidden;
   background: var(--white);
   border: 2px solid var(--ink);
   border-radius: 24px;
 }
+.mock-bar {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 14px 20px;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.mock-title { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; white-space: nowrap; }
+.dots { display: flex; gap: 5px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink); }
+.dots i:first-child { background: var(--ink); }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; font-weight: 600; white-space: nowrap; }
 .chip { padding: 5px 10px; border-radius: 999px; background: var(--paper); border: 1.5px solid var(--ink); }
 .chip-mint { background: var(--mint); }
 .chip-peach { background: var(--peach); }
 .mock-body { flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding: 20px; }
 
-.chain { display: grid; grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr); gap: 12px; align-items: stretch; }
-.chain-arrow { display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; color: var(--muted); }
-.panel { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 14px; border: 1.5px solid var(--line); border-radius: 16px; }
-.panel-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
-.menu-row { display: flex; gap: 10px; align-items: baseline; font-size: 13px; font-weight: 500; padding: 7px 0; border-top: 1.5px solid var(--line); }
-.menu-row:first-of-type { border-top: 0; padding-top: 0; }
-.menu-row b { width: 24px; flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.menu-oven { background: var(--peach); border-radius: 8px; padding: 2px 6px; margin-left: auto; font-size: 11px; font-weight: 600; white-space: nowrap; }
-.group { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
-.item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
-.item .box { width: 16px; height: 16px; border-radius: 5px; }
-.item span:last-child { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; }
-.skipped { margin-top: auto; padding-top: 10px; border-top: 1.5px dashed var(--line); font-size: 12px; font-weight: 500; color: var(--muted); }
-.skipped s { text-decoration-thickness: 1.5px; }
+.week { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.day { display: flex; flex-direction: column; gap: 8px; }
+.day-name { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.meal {
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  font-size: 13px; line-height: 1.3; font-weight: 500;
+}
+.meal-oven { background: var(--peach); border-color: var(--ink); }
+.meal-ai { background: var(--cream); border: 1.5px dashed var(--ink); color: var(--muted); }
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: auto; }
+.note {
+  display: flex; gap: 10px; align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--ink);
+  font-size: 13px; font-weight: 500;
+}
+.note svg { flex-shrink: 0; }
+.note-dashed { margin-top: auto; background: var(--cream); border-style: dashed; }
 
 .tasks { gap: 8px; font-size: 14px; font-weight: 500; }
 .task {
@@ -437,144 +436,126 @@ section[id] { scroll-margin-top: 104px; }
 .task-late { background: var(--peach); border-color: var(--ink); }
 .task-late span:last-child { color: var(--red); }
 
-.board { gap: 0; padding: 8px 20px 20px; }
-.board-row {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 14px; align-items: center;
-  padding: 11px 0;
-  font-size: 14px; font-weight: 500;
-  border-top: 1.5px solid var(--line);
+.family-body {
+  flex-grow: 1;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;
+  padding: 20px;
 }
-.board-row:first-child { border-top: 0; }
-.board-row .who { margin-left: 0; color: var(--ink); }
-.board-when { font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; min-width: 72px; text-align: right; }
-.board-when.is-done { color: var(--green); }
-.board-when.is-today { color: var(--ink); }
-.board-foot { margin-top: 12px; font-size: 12px; font-weight: 500; color: var(--muted); }
-.av-mom { background: #ffb46b; }
-.av-dad { background: #8fc3ff; }
-.av-alisa { background: #c8b4ff; }
-.av-sergey { background: #8fe0b8; }
-
-/* ── Обычная неделя ────────────────────────────────── */
-.days { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 16px; }
-.day {
-  display: flex; flex-direction: column; gap: 12px;
-  padding: 24px;
-  background: var(--white);
-  border-radius: 24px;
+.bars { display: flex; flex-direction: column; justify-content: center; gap: 10px; font-size: 13px; font-weight: 600; }
+.bar-row { display: flex; align-items: center; gap: 10px; }
+.bar-row > span:first-child { width: 60px; }
+.bar-num { width: 38px; text-align: right; }
+.bar-gap { flex-grow: 1; }
+.bar-head { font-size: 11px; font-weight: 600; color: var(--muted); }
+.bar-prev { color: var(--muted); }
+.bar-up { color: var(--green); }
+.bar-notes { display: flex; flex-wrap: wrap; gap: 6px; }
+.bar { flex-grow: 1; height: 24px; overflow: hidden; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--paper); }
+.bar i { display: block; height: 100%; animation: fill 1.2s cubic-bezier(.2, .8, .2, 1) both; }
+.streak {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--yellow-soft);
+  border: 1.5px solid var(--ink);
+  font-size: 12px;
 }
-.day span { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.day strong { font-family: var(--display); font-weight: 500; font-size: 18px; line-height: 1.3; text-wrap: balance; }
-.less {
-  font-family: var(--display); font-weight: 700;
-  font-size: clamp(22px, 2.6vw, 34px); line-height: 1.2;
-  text-align: center; text-wrap: balance;
-  padding: 8px 8px 0;
+.done {
+  align-self: center;
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 18px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 5px 5px 0 var(--lilac);
+  font-size: 13px; font-weight: 500;
 }
-
-/* ── Кульминация ───────────────────────────────────── */
-.payoff {
-  position: relative; overflow: hidden;
-  margin-top: 112px;
-  display: flex; flex-direction: column; align-items: center; gap: 28px;
-  padding: clamp(56px, 7vw, 96px) clamp(24px, 5vw, 64px);
-  background: var(--ink);
-  color: var(--paper);
-  border-radius: 32px;
-  text-align: center;
-}
-.payoff > * { position: relative; }
-.payoff .blob { position: absolute; border-radius: 50%; }
-.blob-yellow { width: 320px; height: 320px; right: -160px; top: -200px; background: var(--yellow); }
-.blob-lilac { width: 240px; height: 240px; left: -140px; bottom: -150px; background: var(--lilac); }
-.payoff-text {
-  max-width: 900px;
-  font-family: var(--display); font-weight: 700;
-  font-size: clamp(26px, 3.6vw, 46px); line-height: 1.15; letter-spacing: -0.01em;
-  text-wrap: balance;
-}
-.payoff-text em { font-style: normal; color: var(--yellow); }
-.payoff .btn-yellow { border-color: var(--yellow); }
-.payoff .btn-yellow:hover { transform: translateY(-2px); }
-.payoff :focus-visible { outline-color: var(--yellow); }
+.done-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.done-task { font-weight: 600; font-size: 15px; }
+.done-row { display: flex; justify-content: space-between; }
+.done-row strong { font-weight: 600; white-space: nowrap; }
+.done-total { padding-top: 10px; border-top: 1.5px dashed var(--ink); }
+.done-button { margin-top: 4px; padding: 11px; border-radius: 999px; background: var(--ink); color: var(--paper); text-align: center; font-weight: 600; }
+@keyframes fill { from { width: 0; } }
 
 /* ── Вопросы ───────────────────────────────────────── */
+.faq { display: flex; flex-direction: column; gap: 40px; padding-top: 112px; }
 .faq-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 20px; }
 .faq-item { display: flex; flex-direction: column; gap: 10px; padding: 28px; background: var(--white); border-radius: 24px; }
 .faq-item h3 { font-family: var(--display); font-weight: 500; font-size: 20px; line-height: 1.25; }
 .faq-item p { font-size: 16px; line-height: 1.6; font-weight: 500; color: var(--body); }
 
-/* ── Ранний доступ ─────────────────────────────────── */
+/* ── Форма записи ─────────────────────────────────── */
 .signup {
+  position: relative; overflow: hidden;
   margin-top: 112px;
-  display: flex; flex-direction: column; align-items: center; gap: 22px;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
   padding: clamp(48px, 6vw, 80px) clamp(24px, 5vw, 64px);
-  background: var(--yellow);
-  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
   border-radius: 32px;
-  box-shadow: 4px 4px 0 var(--ink);
   text-align: center;
 }
+.signup > * { position: relative; }
+.signup .blob { position: absolute; border-radius: 50%; }
+.blob-yellow { width: 320px; height: 320px; right: -160px; top: -200px; background: var(--yellow); }
+.blob-lilac { width: 240px; height: 240px; left: -140px; bottom: -150px; background: var(--lilac); }
 .signup .h2 { max-width: 800px; }
-.signup .lead { max-width: 600px; }
-.signup-form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: 600px; max-width: 100%; margin-top: 8px; }
+.signup .lead { max-width: 560px; color: #e8e1d2; }
+.signup-form { display: flex; gap: 10px; flex-wrap: wrap; width: 560px; max-width: 100%; }
 .signup-form input[type="email"] {
   flex: 1 1 260px;
   min-height: 54px;
   padding: 16px 20px;
   font: 500 16px var(--sans);
   color: var(--ink);
-  background: var(--white);
-  border: 2px solid var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--paper);
   border-radius: 999px;
 }
-.signup-form input[type="email"]:focus { outline: none; box-shadow: 0 0 0 3px var(--white); }
-.signup-form .btn { min-height: 54px; padding: 16px 28px; font-size: 16px; }
-.signup-form .btn:disabled { opacity: .6; cursor: default; transform: none; }
-.signup-meta { font-size: 15px; font-weight: 600; }
+.signup-form input[type="email"]:focus { outline: none; border-color: var(--yellow); box-shadow: 0 0 0 3px var(--yellow); }
+.btn-yellow { min-height: 54px; padding: 16px 28px; font-size: 16px; background: var(--yellow); color: var(--ink); border: 2px solid var(--yellow); }
+.btn-yellow:hover { transform: translateY(-2px); }
+.btn-yellow:disabled { opacity: .6; cursor: default; transform: none; }
+.signup :focus-visible { outline-color: var(--yellow); }
 .signup-status { font-size: 15px; font-weight: 600; }
-.signup-status:empty { margin-top: -22px; }
-.signup-status[data-kind="error"] { color: var(--red); }
-.signup-status[data-kind="success"] { color: var(--green); }
-.signup-small { max-width: 600px; font-size: 13px; line-height: 1.5; font-weight: 500; color: var(--body); }
+.signup-status:empty { margin-top: -24px; }
+.signup-status[data-kind="error"] { color: #ffb4a1; }
+.signup-status[data-kind="success"] { color: #a8e6c4; }
+.signup-small { max-width: 560px; font-size: 13px; line-height: 1.5; font-weight: 500; color: #cfc7b5; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .trap { position: absolute; left: -9999px; }
 
 /* ── Подвал ────────────────────────────────────────── */
 .footer {
   margin-top: auto;
-  display: flex; align-items: center; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   padding: 40px 8px 28px;
   font-size: 14px; font-weight: 500;
   color: var(--muted);
 }
-.footer-brand { display: flex; align-items: center; gap: 10px; }
 .footer-mark { width: 28px; height: 28px; flex-shrink: 0; }
 .footer strong { font-family: var(--serif); font-weight: 400; font-size: 22px; color: var(--ink); }
-.footer-line { font-family: var(--serif); font-size: 17px; color: var(--ink); }
 
 /* ── Узкие экраны ──────────────────────────────────── */
-@media (max-width: 1080px) {
-  .brand-tagline { display: none; }
-}
-@media (max-width: 1000px) {
-  .nav { display: none; }
-}
 @media (max-width: 960px) {
   .hero { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 900px) {
-  .header { top: 8px; padding: 8px 8px 8px 14px; }
-  .was, .now { padding: 18px 20px; gap: 14px; }
+  .was, .now { padding: 16px 20px; gap: 16px; }
+  .was-art { width: 120px; }
+  .now-art { width: 140px; margin-right: -8px; }
 }
 @media (max-width: 700px) {
   .compare-head { display: none; }
   .compare-row { grid-template-columns: 1fr; }
-  .was { padding-bottom: 12px; }
-  .now { border-left: 0; }
-  .chain { grid-template-columns: minmax(0, 1fr); }
-  .chain-arrow { transform: rotate(90deg); height: 24px; }
-  .thought { white-space: normal; text-align: center; }
+  .was { min-height: 0; padding-bottom: 12px; }
+  .now { min-height: 0; border-left: 0; }
+  .now-art { display: none; }
+  .why-note { flex-direction: column; align-items: stretch; gap: 16px; padding: 0; }
+  .why-note-art { width: 100%; height: auto; margin: 0; }
+  .why-note p { padding: 0 24px 24px; }
 }
 @media (max-width: 640px) {
   .pillar { padding-right: 24px; padding-bottom: 0; }
@@ -586,14 +567,24 @@ section[id] { scroll-margin-top: 104px; }
   }
   .pillar-arrow { display: none; }
 }
+@media (max-width: 1080px) {
+  .brand-tagline { display: none; }
+}
+@media (max-width: 1000px) {
+  .nav { display: none; }
+}
+@media (max-width: 900px) {
+  .header { top: 8px; padding: 8px 8px 8px 14px; }
+}
 @media (max-width: 520px) {
+  .brand-tagline { display: none; }
   .btn-small { padding: 10px 16px; }
-  .board-row { grid-template-columns: minmax(0, 1fr) auto; }
-  .board-when { grid-column: 1 / -1; text-align: left; min-width: 0; }
+  .week { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .btn, .link-arrow, .pillar { transition: none; }
+  .bar i { animation: none; }
+  .btn, .pillar, .link-arrow { transition: none; }
 }
 </style>
 </head>
@@ -616,35 +607,30 @@ section[id] { scroll-margin-top: 104px; }
     <a href="#family">Семья</a>
     <a href="#faq">Вопросы</a>
   </nav>
-  <a class="btn btn-dark btn-small" href="#signup">Попробовать</a>
+  <a class="btn btn-dark btn-small" href="#signup">Ранний доступ</a>
 </header>
 
 <main>
 
 <section class="hero" id="top">
-  <h1 class="hero-tagline">Дом, в&nbsp;котором всё ладится</h1>
   <div class="hero-main">
     <div class="hero-copy">
-      <h2 class="hero-title">Домашние дела не&nbsp;должны быть только в&nbsp;одной голове</h2>
-      <p class="hero-lead">ЛАД — личный администратор дома. Он помнит бытовые дела, помогает с&nbsp;меню и&nbsp;покупками и&nbsp;распределяет задачи между всей семьёй.</p>
+      <h1>Дом, в&nbsp;котором всё ладится</h1>
+      <p class="hero-lead">ЛАД — Личный Администратор Дома. Меню, покупки и&nbsp;дела по&nbsp;дому&nbsp;— в&nbsp;одном месте и&nbsp;на&nbsp;всю семью. Готовить быстрее без потери вкуса и&nbsp;пользы, а&nbsp;время&nbsp;— на&nbsp;то, что вы любите делать вместе.</p>
     </div>
     <div class="hero-actions">
-      <div class="hero-actions-row">
-        <a class="btn btn-dark btn-large" href="#signup">Хочу попробовать ЛАД<span aria-hidden="true">→</span></a>
-        <a class="link-arrow" href="#how">Как это работает <span aria-hidden="true">→</span></a>
-      </div>
-      <p class="hero-meta">Бесплатно · первые 50 семей · карта не нужна</p>
+      <a class="btn btn-dark btn-large" href="#signup">Получить ранний доступ<span aria-hidden="true">→</span></a>
+      <a class="link-arrow" href="#how">Как это работает <span aria-hidden="true">→</span></a>
     </div>
     <img class="hero-art" src="img/hero-room.png" alt="" width="774" height="466" fetchpriority="high">
   </div>
-
   <div class="pillars">
     <a class="pillar pillar-kitchen" href="#kitchen">
       <span class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
       <span class="pillar-text">
         <span class="pillar-label">Кухня</span>
         <span class="pillar-title">Что будем готовить?&nbsp;— решено.</span>
-        <span class="pillar-desc">ЛАД составляет меню под вашу семью и&nbsp;превращает его в&nbsp;список покупок. Учитывает предпочтения, аллергии и&nbsp;то, что уже есть дома.</span>
+        <span class="pillar-desc">ИИ помогает составлять меню на&nbsp;неделю с&nbsp;учётом предпочтений, аллергий и&nbsp;диет каждого. Список покупок&nbsp;— с&nbsp;учётом того, что уже есть дома.</span>
       </span>
       <img class="pillar-art" src="img/pillar-kitchen.png" alt="" width="342" height="264">
       <span class="pillar-arrow" aria-hidden="true">→</span>
@@ -654,7 +640,7 @@ section[id] { scroll-margin-top: 104px; }
       <span class="pillar-text">
         <span class="pillar-label">Дом</span>
         <span class="pillar-title">Что нужно сделать?&nbsp;— не&nbsp;забыто.</span>
-        <span class="pillar-desc">Уборка, обслуживание, расходники, мастера и&nbsp;дела, которые случаются раз в&nbsp;год. ЛАД всё помнит и&nbsp;помогает вовремя.</span>
+        <span class="pillar-desc">Повседневные дела распределены по&nbsp;дням и&nbsp;людям. Бытовая химия и&nbsp;мелочи для дома не&nbsp;заканчиваются в&nbsp;неподходящий момент, а&nbsp;контакты мастеров и&nbsp;инструкции по&nbsp;дому&nbsp;— под рукой.</span>
       </span>
       <img class="pillar-art" src="img/pillar-home.png" alt="" width="307" height="252">
       <span class="pillar-arrow" aria-hidden="true">→</span>
@@ -664,7 +650,7 @@ section[id] { scroll-margin-top: 104px; }
       <span class="pillar-text">
         <span class="pillar-label">Семья</span>
         <span class="pillar-title">Кто это сделает?&nbsp;— понятно.</span>
-        <span class="pillar-desc">ЛАД распределяет дела между всеми, считает вклад каждого и&nbsp;помогает превратить домашнюю рутину в&nbsp;общую игру.</span>
+        <span class="pillar-desc">Дела по&nbsp;дому делает вся семья, и&nbsp;каждый вклад засчитывается. А&nbsp;награды и&nbsp;достижения помогают увлечь детей.</span>
       </span>
       <img class="pillar-art" src="img/pillar-family.png" alt="" width="307" height="248">
       <span class="pillar-arrow" aria-hidden="true">→</span>
@@ -672,170 +658,161 @@ section[id] { scroll-margin-top: 104px; }
   </div>
 </section>
 
-<section class="section" id="why">
+<section class="why" id="why">
   <div class="eyebrow">Зачем ЛАД</div>
-  <div class="section-head section-head-center">
+  <div class="section-head">
     <div>
-      <h2 class="h2 h2-wide">Слишком много всего держится в&nbsp;одной голове</h2>
-      <p class="lead">В каждой семье есть человек, который помнит всё. Не только «что сделать», но и&nbsp;придумать, купить, напомнить, проверить и&nbsp;не&nbsp;забыть в&nbsp;следующий раз.</p>
+      <h2 class="h2 h2-wide">Всё важное по&nbsp;дому&nbsp;— в&nbsp;одном месте</h2>
     </div>
+    <p class="lead">В каждой семье есть человек, который помнит всё: что купить, что приготовить, когда менять фильтр. <mark class="hl">ЛАД делит это на&nbsp;всю семью.</mark></p>
   </div>
-  <ul class="thoughts" aria-label="Что приходится держать в голове">
-    <li class="thought">Что приготовить?</li>
-    <li class="thought">Что купить?</li>
-    <li class="thought">Кто это сделает?</li>
-    <li class="thought">Когда менять фильтр?</li>
-    <li class="thought">Где телефон мастера?</li>
-    <li class="thought">Что опять нужно не&nbsp;забыть?</li>
-  </ul>
-  <div class="turn">
-    <div class="turn-arrow" aria-hidden="true"></div>
-    <h2 class="h2 h2-wide">Теперь это знает <mark class="hl">вся семья</mark></h2>
-  </div>
-  <div class="compare">
-    <div class="compare-head" aria-hidden="true"><span>Сейчас</span><span>С ЛАД</span></div>
-    <div class="compare-row">
-      <div class="was">
-        <span class="was-mark" aria-hidden="true">?</span>
-        <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Что на ужин?»</strong><p>Каждый вечер один человек решает, что приготовить.</p></div>
+  <div class="compare-wrap">
+    <div class="compare">
+      <div class="compare-head" aria-hidden="true"><span>Сейчас</span><span>С ЛАД</span></div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-1.png" alt="" width="169" height="107" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Что на ужин?»</strong><p>Каждый вечер, и&nbsp;решает обычно один человек в&nbsp;последний момент.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Меню уже есть.</strong><p>ИИ помогает составить меню на&nbsp;неделю из&nbsp;ваших рецептов&nbsp;— с&nbsp;учётом предпочтений, аллергий и&nbsp;диет каждого.</p></div>
+          <img class="now-art" src="img/lad-1.png" alt="" width="234" height="118" loading="lazy">
+        </div>
       </div>
-      <div class="now">
-        <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
-        <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Меню уже есть.</strong><p>ЛАД составляет меню на неделю с&nbsp;учётом вкусов, аллергий и&nbsp;предпочтений всей семьи.</p></div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-2.png" alt="" width="169" height="94" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Купи что-нибудь»</strong><p>Список составляют, не&nbsp;зная точно, что есть дома,&nbsp;— что-то забыли, что-то купили дважды.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Покупки связаны с&nbsp;меню.</strong><p>Список покупок собирается из&nbsp;меню&nbsp;— без того, что уже есть дома.</p></div>
+          <img class="now-art" src="img/lad-2.png" alt="" width="234" height="115" loading="lazy">
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-3.png" alt="" width="169" height="95" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Почему опять я?»</strong><p>Уборка, стирка и&nbsp;готовка на&nbsp;одном человеке.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Все знают свои задачи.</strong><p>Дела распределены по&nbsp;людям и&nbsp;дням, и&nbsp;каждый вклад засчитывается.</p></div>
+          <img class="now-art" src="img/lad-3.png" alt="" width="234" height="115" loading="lazy">
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-4.png" alt="" width="169" height="90" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Сколько раз ещё просить?»</strong><p>Детей приходится просить по&nbsp;сто раз.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Помнить не&nbsp;нужно.</strong><p>Каждый вклад засчитывается, а&nbsp;для детей есть награды и&nbsp;достижения&nbsp;— как дополнительная мотивация.</p></div>
+          <img class="now-art" src="img/lad-4.png" alt="" width="234" height="99" loading="lazy">
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="was">
+          <img class="was-art" src="img/now-5.png" alt="" width="169" height="95" loading="lazy">
+          <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Где перекрыть воду?»</strong><p>Где перекрыть воду и&nbsp;как связаться с&nbsp;сантехником, знает один человек.</p></div>
+        </div>
+        <div class="now">
+          <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+          <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Знания дома доступны всем.</strong><p>Теперь это доступно каждому в&nbsp;семье: инструкции по&nbsp;дому и&nbsp;контакты мастеров всегда под рукой.</p></div>
+          <img class="now-art" src="img/lad-5.png" alt="" width="234" height="111" loading="lazy">
+        </div>
       </div>
     </div>
-    <div class="compare-row">
-      <div class="was">
-        <span class="was-mark" aria-hidden="true">?</span>
-        <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Купи что-нибудь»</strong><p>А дома уже третья пачка гречки.</p></div>
-      </div>
-      <div class="now">
-        <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
-        <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Покупки связаны с&nbsp;меню.</strong><p>В список попадает только то, чего действительно не&nbsp;хватает.</p></div>
-      </div>
-    </div>
-    <div class="compare-row">
-      <div class="was">
-        <span class="was-mark" aria-hidden="true">?</span>
-        <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Почему опять я?»</strong><p>Уборка, стирка и&nbsp;готовка снова на&nbsp;одном человеке.</p></div>
-      </div>
-      <div class="now">
-        <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
-        <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Все знают свои задачи.</strong><p>Дела распределены между всеми, и&nbsp;каждый видит, что и&nbsp;когда делает он.</p></div>
-      </div>
-    </div>
-    <div class="compare-row">
-      <div class="was">
-        <span class="was-mark" aria-hidden="true">?</span>
-        <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Сколько раз ещё просить?»</strong><p>Дети забывают свои дела, взрослые тоже.</p></div>
-      </div>
-      <div class="now">
-        <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
-        <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Напоминать не&nbsp;нужно.</strong><p>Каждому ЛАД показывает его дела на сегодня, а&nbsp;вам — что уже сделано.</p></div>
-      </div>
-    </div>
-    <div class="compare-row">
-      <div class="was">
-        <span class="was-mark" aria-hidden="true">?</span>
-        <div class="cell-text"><strong><span class="visually-hidden">Сейчас: </span>«Где перекрыть воду?»</strong><p>Знает только один человек. И&nbsp;как зовут сантехника тоже.</p></div>
-      </div>
-      <div class="now">
-        <span class="check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
-        <div class="cell-text"><strong><span class="visually-hidden">С ЛАД: </span>Знания дома доступны всем.</strong><p>Инструкции, контакты мастеров и&nbsp;важная информация — в&nbsp;книге дома.</p></div>
-      </div>
+    <div class="why-note">
+      <img class="why-note-art" src="img/family-banner.png" alt="" width="325" height="103" loading="lazy">
+      <p><strong>ЛАД не&nbsp;заставляет семью делать больше.</strong><span>Он помогает одному человеку больше не&nbsp;делать всё самому.</span></p>
     </div>
   </div>
 </section>
 
-<section class="section" id="how">
-  <div class="eyebrow">Как работает</div>
+<section class="how" id="how">
+  <div class="eyebrow">01 · Как работает</div>
   <div class="section-head">
     <div>
-      <h2 class="h2 h2-wide">Помнит. Решает. Распределяет.</h2>
+      <h2 class="h2 h2-wide">Одна цепочка вместо разных приложений, заметок и&nbsp;чатов</h2>
     </div>
-    <p class="lead">ЛАД берёт на себя то, что раньше приходилось держать в&nbsp;голове: от&nbsp;ужина на&nbsp;среду до&nbsp;замены фильтра раз в&nbsp;три месяца.</p>
+    <p class="lead">Меню сверяется с кладовой — покупаете только недостающее, а готовка попадает в общий план дел. Сорвался план — ЛАД подскажет, что приготовить из того, что есть.</p>
   </div>
-  <div class="verbs">
-    <article class="verb verb-remember">
-      <h3>Помнит</h3>
-      <p>Что нужно сделать, купить, проверить или заменить — и&nbsp;когда. Напомнит заранее, а&nbsp;не&nbsp;когда уже поздно.</p>
-      <div class="verb-ui" aria-hidden="true">
-        <span>Фильтры воды<b>через 12 дней</b></span>
-        <span>Показания счётчиков<b>до 10 окт</b></span>
-        <span>Котёл перед сезоном<b>ноябрь</b></span>
-      </div>
-    </article>
-    <article class="verb verb-decide">
-      <h3>Решает</h3>
-      <p>Помогает выбрать, что приготовить, что купить и&nbsp;что делать сегодня, чтобы не&nbsp;начинать каждый вечер с&nbsp;нуля.</p>
-      <div class="verb-ui" aria-hidden="true">
-        <span>Ужин в среду<b>паста с индейкой</b></span>
-        <span>Список покупок<b>7 позиций</b></span>
-        <span>Испортится за 3 дня<b>шпинат, кефир</b></span>
-      </div>
-    </article>
-    <article class="verb verb-share">
-      <h3>Распределяет</h3>
-      <p>Раскладывает дела между членами семьи. Каждый видит своё, и&nbsp;никому не&nbsp;нужно координировать остальных.</p>
-      <div class="verb-ui" aria-hidden="true">
-        <span>Закупка по списку<b>Папа · сб</b></span>
-        <span>Пропылесосить<b>Алиса · чт</b></span>
-        <span>Фильтры воды<b>Сергей · вс</b></span>
-      </div>
-    </article>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:var(--yellow)">1</div>
+      <h3>Меню</h3>
+      <p>ИИ помогает составить меню на неделю из ваших рецептов — с учётом предпочтений, диет и аллергий каждого в семье. Сразу видно, насколько сбалансировано меню.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--peach)">2</div>
+      <h3>Покупки</h3>
+      <p>Список собирается из меню сам: без того, что уже есть дома, и по отделам магазина. Купленное одной кнопкой уходит в кладовую.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--blue)">3</div>
+      <h3>Готовка</h3>
+      <p>ЛАД показывает, что разморозить и подготовить заранее, какие блюда приготовить вместе и какие шаги можно поручить домашним.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--lilac)">4</div>
+      <h3>Дом и семья</h3>
+      <p>Готовка, уборка и остальные домашние дела — в общем плане. Баллы начисляются по одним правилам для всех.</p>
+    </div>
+  </div>
+</section>
+
+<section class="beta" id="beta">
+  <div class="beta-copy">
+    <h2>Ищем 50 семей, которые попробуют ЛАД первыми</h2>
+    <p class="lead">Мы делаем ЛАД для семей, где дом пока держится на одном человеке — и хочется это изменить. Нужны первые семьи, которые будут вести в нём хозяйство и честно говорить, что мешает.</p>
+  </div>
+  <div class="facts">
+    <div class="fact"><strong>0 ₽</strong><span>ранний доступ бесплатный</span></div>
+    <div class="fact"><strong>Напрямую</strong><span>пишете тем, кто делает ЛАД</span></div>
+    <div class="fact"><strong>50 мест</strong><span>в первой волне</span></div>
   </div>
 </section>
 
 <section class="feature feature-first" id="kitchen">
+  <div class="eyebrow">02 · Кухня</div>
   <div class="feature-text bg-peach">
-    <div class="eyebrow">Кухня</div>
-    <h2 class="h2">Вечерний вопрос «что готовить» исчезает</h2>
+    <h2 class="h2">Вечный вопрос «что готовить» исчезает</h2>
     <ul class="checks">
-      <li>ИИ составляет меню на неделю из ваших рецептов с учётом предпочтений, диет и аллергий каждого в семье</li>
-      <li>Список покупок собирается из меню сам: без того, что уже есть дома, и по отделам магазина</li>
-      <li>ЛАД знает, что лежит в кладовой, и первым предложит то, что скоро испортится</li>
+      <li>ИИ помогает составить меню на неделю из ваших рецептов — с учётом предпочтений, диет и аллергий каждого в семье. Можно собрать и вручную</li>
+      <li>ИИ знает, что лежит в кладовой: подскажет, что приготовить из имеющихся продуктов, и первым предложит то, что испортится за 3 дня</li>
+      <li>Сбалансированное меню без калькулятора: калории, белки, жиры и углеводы на порцию считаются сами</li>
+      <li>Рецепт из любого текста — из Telegram, сообщения подруги, с сайта</li>
     </ul>
-    <p class="result">Больше не&nbsp;нужно вспоминать, что закончилось.</p>
   </div>
-  <div class="mock" role="img" aria-label="Пример: меню на неделю и собранный из него список покупок по отделам магазина, без продуктов, которые уже есть дома">
+  <div class="mock" role="img" aria-label="Пример: меню на неделю с напоминаниями, что разморозить и что скоро испортится">
     <div class="mock-bar">
-      <div class="mock-title"><span class="dots"><i></i><i></i><i></i></span>Неделя 6–12 окт</div>
+      <div class="mock-title"><span class="dots"><i></i><i></i><i></i></span>Неделя 5–11 окт</div>
       <div class="chips">
         <span class="chip chip-mint">Белок 96 / 90 г</span>
         <span class="chip">на 4 человек</span>
       </div>
     </div>
     <div class="mock-body">
-      <div class="chain">
-        <div class="panel">
-          <div class="panel-title">Ужины <span class="tag tag-cream">меню</span></div>
-          <div class="menu-row"><b>Пн</b>Курица с овощами<span class="menu-oven">200°</span></div>
-          <div class="menu-row"><b>Вт</b>Запечённая рыба<span class="menu-oven">190°</span></div>
-          <div class="menu-row"><b>Ср</b>Паста с индейкой</div>
-          <div class="menu-row"><b>Чт</b>Борщ</div>
-          <div class="menu-row"><b>Пт</b><span style="color:var(--muted)">✦ ИИ предложит</span></div>
-        </div>
-        <div class="chain-arrow" aria-hidden="true">→</div>
-        <div class="panel">
-          <div class="panel-title">Покупки <span class="tag">7 позиций</span></div>
-          <div class="group">Мясо и рыба</div>
-          <div class="item"><span class="box"></span>Куриное филе<span>1 кг</span></div>
-          <div class="item"><span class="box"></span>Треска<span>600 г</span></div>
-          <div class="group">Овощи</div>
-          <div class="item"><span class="box"></span>Брокколи<span>400 г</span></div>
-          <div class="item"><span class="box"></span>Шпинат<span>1 уп</span></div>
-          <div class="group">Молочное</div>
-          <div class="item"><span class="box"></span>Кефир<span>1 л</span></div>
-          <div class="skipped">Уже есть дома, не&nbsp;добавил: <s>паста</s>, <s>свёкла</s>, <s>яйца</s></div>
-        </div>
+      <div class="week">
+        <div class="day"><div class="day-name">Пн</div><div class="meal">Овсянка с ягодами</div><div class="meal">Чечевичный суп</div><div class="meal meal-oven">Курица с овощами · 200°</div><div class="meal">Яблоко и сыр</div></div>
+        <div class="day"><div class="day-name">Вт</div><div class="meal">Творог с орехами</div><div class="meal">Суп (остаток)</div><div class="meal meal-oven">Запечённая рыба · 190°</div><div class="meal">Кефир</div></div>
+        <div class="day"><div class="day-name">Ср</div><div class="meal">Омлет</div><div class="meal">Салат с нутом</div><div class="meal">Паста с индейкой</div><div class="meal">Орехи</div></div>
+        <div class="day"><div class="day-name">Чт</div><div class="meal">Гречка с яйцом</div><div class="meal">Борщ</div><div class="meal meal-ai">✦ ИИ предложит</div><div class="meal">Йогурт</div></div>
       </div>
-      <div class="note" style="background:var(--mint)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Сегодня</strong> разморозить курицу · <strong>завтра</strong> замочить фасоль</span></div>
+      <div class="notes">
+        <div class="note" style="background:var(--mint)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Сегодня</strong> разморозить курицу · <strong>завтра</strong> замочить фасоль</span></div>
+        <div class="note" style="background:var(--peach)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Кефир, шпинат и филе испортятся за 3 дня</span></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="feature" id="home">
-  <div class="mock" role="img" aria-label="Пример: список домашних дел, от ежедневной уборки до редкого обслуживания, и запись из книги дома">
+  <div class="eyebrow">03 · Дом</div>
+  <div class="mock" role="img" aria-label="Пример: список домашних дел — от ежедневной уборки до редкого обслуживания — и запись из книги дома">
     <div class="mock-bar">
       <div class="mock-title"><span class="dots"><i></i><i></i><i></i></span>Дела по дому</div>
       <div class="chips">
@@ -851,81 +828,77 @@ section[id] { scroll-margin-top: 104px; }
       <div class="task"><span>Замена фильтров воды</span><span>раз в 3 месяца</span></div>
       <div class="task"><span>Проверка котла перед сезоном</span><span>раз в год</span></div>
       <div class="note note-dashed">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        <span>Книга дома: кран воды — в санузле, за люком · сантехник Андрей, был 12 марта</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b2621" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Книга дома: кран воды — в санузле, за люком · щиток — прихожая, за зеркалом</span>
       </div>
     </div>
   </div>
   <div class="feature-text bg-blue">
-    <div class="eyebrow">Дом</div>
-    <h2 class="h2">По графику, а&nbsp;не&nbsp;по&nbsp;аварии</h2>
+    <h2 class="h2">Все дела по&nbsp;дому&nbsp;— по&nbsp;плану и&nbsp;без авралов</h2>
     <ul class="checks">
-      <li>Уборка, стирка, мусор: повседневные дела разложены по дням и людям</li>
-      <li>Фильтры, счётчики, котёл: задайте график один раз, и ЛАД напомнит, когда пора</li>
-      <li>Книга дома: где перекрыть воду, где щиток, контакты мастеров и инструкции для любого взрослого</li>
+      <li>Уборка, стирка, мусор: повседневные дела распределены по дням и людям в общем плане</li>
+      <li>Фильтры, счётчики, обслуживание техники: редкие дела не теряются — задайте график один раз, и ЛАД одним нажатием добавит их в план на неделю</li>
+      <li>Книга дома: где перекрыть воду, где щиток, коды и инструкции — для любого взрослого и помощницы</li>
+      <li>Мастера с вашей оценкой и датой последнего вызова</li>
+      <li>Бытовая химия и мелочи для дома не заканчиваются в неподходящий момент. Опись имущества — для страховки</li>
     </ul>
-    <p class="result">Важная информация о&nbsp;доме больше не&nbsp;потеряется.</p>
   </div>
 </section>
 
 <section class="feature" id="family">
+  <div class="eyebrow">04 · Семья</div>
   <div class="feature-text bg-lilac">
-    <div class="eyebrow">Семья</div>
-    <h2 class="h2">Все знают, что нужно сделать и&nbsp;кто это делает</h2>
+    <h2 class="h2">Дела делятся&nbsp;— и&nbsp;это видно</h2>
     <ul class="checks">
-      <li>Дела на неделе распределены между всеми, у каждого свой список и свои напоминания</li>
-      <li>Вся домашняя работа становится видимой: что сделано, что сегодня, что ждёт</li>
-      <li>Роли для взрослых, подростков и помощников, чтобы каждый видел только своё</li>
-      <li>Баллы, серии и награды можно включить, если семье так веселее</li>
+      <li>Роли: владелец, взрослый, подросток, помощник — у каждого свои права</li>
+      <li>Баллы зависят от сложности и времени — сделанное вовремя ценится больше</li>
+      <li>Награды за баллы вы придумываете сами — от выбора фильма на вечер до карманных денег</li>
+      <li>Каждый видит свой прогресс по сравнению с прошлой неделей</li>
     </ul>
-    <p class="result">Больше не&nbsp;нужно каждому напоминать, что делать.</p>
   </div>
-  <div class="mock" role="img" aria-label="Пример: доска недели — какое дело, кто его делает и когда; часть дел уже отмечена сделанными">
+  <div class="mock" role="img" aria-label="Пример: баллы каждого члена семьи за неделю в сравнении с прошлой неделей и окно отметки о выполненном деле">
     <div class="mock-bar">
-      <div class="mock-title"><span class="dots"><i></i><i></i><i></i></span>Доска недели</div>
-      <div class="chips">
-        <span class="chip chip-mint">4 из 9 сделано</span>
+      <div class="mock-title"><span class="dots"><i></i><i></i><i></i></span>Вклад за неделю</div>
+    </div>
+    <div class="family-body">
+      <div class="bars">
+        <div class="bar-row bar-head"><span></span><div class="bar-gap"></div><span class="bar-num">баллы</span><span class="bar-num">было</span></div>
+        <div class="bar-row"><span>Мама</span><div class="bar"><i style="width:86%;background:#ffb46b"></i></div><span class="bar-num">95</span><span class="bar-num bar-prev">120</span></div>
+        <div class="bar-row"><span>Папа</span><div class="bar"><i style="width:82%;background:#8fc3ff;animation-delay:.1s"></i></div><span class="bar-num">90&nbsp;<span class="bar-up">↑</span></span><span class="bar-num bar-prev">70</span></div>
+        <div class="bar-row"><span>Сергей</span><div class="bar"><i style="width:64%;background:#8fe0b8;animation-delay:.2s"></i></div><span class="bar-num">70&nbsp;<span class="bar-up">↑</span></span><span class="bar-num bar-prev">55</span></div>
+        <div class="bar-row"><span>Алиса</span><div class="bar"><i style="width:50%;background:#c8b4ff;animation-delay:.3s"></i></div><span class="bar-num">55&nbsp;<span class="bar-up">↑</span></span><span class="bar-num bar-prev">40</span></div>
+        <div class="bar-notes">
+          <div class="streak">Маме стало легче</div>
+          <div class="streak">★ Алиса — личный рекорд</div>
+        </div>
+      </div>
+      <div class="done">
+        <div class="done-label">Выполнено</div>
+        <div class="done-task">Пропылесосить гостиную</div>
+        <div class="done-row"><span>Кто сделал</span><strong>Алиса</strong></div>
+        <div class="done-row"><span>Потрачено</span><strong>15 мин</strong></div>
+        <div class="done-row"><span>Срок</span><strong style="color:var(--green)">вовремя</strong></div>
+        <div class="done-row done-total"><span>Баллы</span><strong>5 + 1 = 6</strong></div>
+        <div class="done-button">Подтвердить</div>
       </div>
     </div>
-    <div class="mock-body board">
-      <div class="board-row"><span>Ужин: курица с овощами</span><span class="who"><span class="mini-avatar av-mom">М</span>Мама</span><span class="board-when is-done">сделано</span></div>
-      <div class="board-row"><span>Загрузить посудомойку</span><span class="who"><span class="mini-avatar av-sergey">С</span>Сергей</span><span class="board-when is-done">сделано</span></div>
-      <div class="board-row"><span>Закупка по списку</span><span class="who"><span class="mini-avatar av-dad">П</span>Папа</span><span class="board-when is-today">сегодня</span></div>
-      <div class="board-row"><span>Пропылесосить гостиную</span><span class="who"><span class="mini-avatar av-alisa">А</span>Алиса</span><span class="board-when is-today">сегодня</span></div>
-      <div class="board-row"><span>Сменить постельное бельё</span><span class="who"><span class="mini-avatar av-dad">П</span>Папа</span><span class="board-when">чт</span></div>
-      <div class="board-row"><span>Ужин: борщ</span><span class="who"><span class="mini-avatar av-mom">М</span>Мама</span><span class="board-when">чт</span></div>
-      <div class="board-row"><span>Замена фильтров воды</span><span class="who"><span class="mini-avatar av-sergey">С</span>Сергей</span><span class="board-when">вс</span></div>
-      <p class="board-foot">Баллы и награды выключены. Включить можно в настройках дома.</p>
+  </div>
+  <div class="board" aria-label="Пример доски недели">
+    <div class="board-title">
+      <strong>Доска недели</strong>
+      <span>Кто, что, сколько баллов и времени</span>
+    </div>
+    <div class="board-people">
+      <div class="person" style="background:#fff3e8"><span class="avatar" style="background:#ffb46b" aria-hidden="true">М</span><span class="person-text"><span class="person-top"><strong>Мама</strong><b>14 баллов</b></span><span class="person-top"><span class="person-task">Ужин · курица</span><span class="person-time">45 мин</span></span></span></div>
+      <div class="person" style="background:#eaf3ff"><span class="avatar" style="background:#8fc3ff" aria-hidden="true">П</span><span class="person-text"><span class="person-top"><strong>Папа</strong><b>15 баллов</b></span><span class="person-top"><span class="person-task">Закупка</span><span class="person-time">50 мин</span></span></span></div>
+      <div class="person" style="background:#f3edff"><span class="avatar" style="background:#c8b4ff" aria-hidden="true">А</span><span class="person-text"><span class="person-top"><strong>Алиса</strong><b>6 баллов</b></span><span class="person-top"><span class="person-task">Пропылесосить</span><span class="person-time">15 мин</span></span></span></div>
+      <div class="person" style="background:#e6f6ee"><span class="avatar" style="background:#8fe0b8" aria-hidden="true">С</span><span class="person-text"><span class="person-top"><strong>Сергей</strong><b>11 баллов</b></span><span class="person-top"><span class="person-task">Фильтры воды</span><span class="person-time">10 мин</span></span></span></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="week">
-  <div class="eyebrow">Обычная неделя</div>
-  <div class="section-head section-head-center">
-    <div>
-      <h2 class="h2 h2-wide">Как меняется обычный день</h2>
-    </div>
-  </div>
-  <div class="days">
-    <div class="day"><span>Воскресенье вечером</span><strong>Меню на&nbsp;неделю уже готово.</strong></div>
-    <div class="day"><span>Перед магазином</span><strong>Список покупок уже собран.</strong></div>
-    <div class="day"><span>Утром</span><strong>Каждый видит свои дела на&nbsp;сегодня.</strong></div>
-    <div class="day"><span>Через месяц</span><strong>ЛАД напоминает о&nbsp;плановом обслуживании.</strong></div>
-    <div class="day"><span>Когда нужен мастер</span><strong>Контакт и&nbsp;история уже в&nbsp;книге дома.</strong></div>
-  </div>
-  <p class="less">Меньше помнить. Меньше напоминать. Меньше контролировать.</p>
-</section>
-
-<section class="payoff" aria-label="Главная мысль">
-  <div class="blob blob-yellow" aria-hidden="true"></div>
-  <div class="blob blob-lilac" aria-hidden="true"></div>
-  <p class="payoff-text">ЛАД не&nbsp;заставляет семью делать больше. <em>Он помогает одному человеку больше не&nbsp;делать всё самому.</em></p>
-  <a class="btn btn-yellow btn-large" href="#signup">Хочу попробовать ЛАД<span aria-hidden="true">→</span></a>
-</section>
-
-<section class="section" id="faq">
-  <div class="eyebrow">Вопросы</div>
+<section class="faq" id="faq">
+  <div class="eyebrow">05 · Вопросы</div>
   <div class="section-head">
     <div>
       <h2 class="h2 h2-wide">Что обычно спрашивают</h2>
@@ -934,47 +907,44 @@ section[id] { scroll-margin-top: 104px; }
   <div class="faq-list">
     <div class="faq-item">
       <h3>Это приложение или&nbsp;сайт?</h3>
-      <p>Сайт. Открывается в браузере на телефоне и на компьютере, устанавливать ничего не нужно.</p>
+      <p>Это приложение, которое работает прямо в браузере — на телефоне и на компьютере. Скачивать и устанавливать ничего не нужно.</p>
     </div>
     <div class="faq-item">
       <h3>Всей семье нужно регистрироваться?</h3>
-      <p>Нет, начать может один человек. Остальных можно пригласить по ссылке или просто внести в список без входа в ЛАД, чтобы учитывать их диету и аллергии.</p>
+      <p>Нет, начать может один человек. Остальных можно пригласить по ссылке — или просто внести в список без входа в ЛАД, чтобы учитывать их диету и аллергии.</p>
     </div>
     <div class="faq-item">
       <h3>Кто видит данные нашей семьи?</h3>
-      <p>Только люди, которых вы сами пригласили в свой дом; что кому можно, определяет роль. Когда вы просите ИИ составить меню или разобрать рецепт, запрос вместе с диетами и аллергиями семьи обрабатывает внешний сервис, Claude от Anthropic.</p>
+      <p>Только люди, которых вы сами пригласили в свой дом; что кому можно, определяет роль. Когда вы просите ИИ составить меню или разобрать рецепт, запрос — вместе с диетами и аллергиями семьи — обрабатывает внешний сервис, Claude от Anthropic.</p>
     </div>
     <div class="faq-item">
       <h3>Сколько это стоит?</h3>
-      <p>Ранний доступ бесплатный. Позже появятся платные тарифы: за дом, а не за каждого человека.</p>
+      <p>Ранний доступ бесплатный. Позже появятся платные тарифы — за дом, а не за каждого человека.</p>
     </div>
   </div>
 </section>
 
 <section class="signup" id="signup">
-  <div class="eyebrow">Ранний доступ</div>
-  <h2 class="h2 h2-wide">Попробуйте ЛАД одним из&nbsp;первых</h2>
-  <p class="lead">Первые 50 семей получают бесплатный ранний доступ и&nbsp;помогают нам сделать ЛАД действительно полезным для реальной жизни. Оставьте почту, и&nbsp;мы напишем, когда откроем доступ.</p>
+  <div class="blob blob-yellow" aria-hidden="true"></div>
+  <div class="blob blob-lilac" aria-hidden="true"></div>
+  <h2 class="h2 h2-wide">Станьте одной из&nbsp;первых семей в&nbsp;ЛАД</h2>
+  <p class="lead">Оставьте почту — напишем, когда откроем доступ, и поможем всё настроить.</p>
   <form class="signup-form" id="signup-form" novalidate>
     <label class="visually-hidden" for="email">Электронная почта</label>
     <input id="email" name="email" type="email" required autocomplete="email" placeholder="Электронная почта">
     <input class="trap" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <button class="btn btn-dark" type="submit">Хочу попробовать ЛАД</button>
+    <button class="btn btn-yellow" type="submit">Записаться</button>
   </form>
-  <p class="signup-meta">Первые 50 семей · бесплатно · карта не нужна</p>
   <p class="signup-status" id="signup-status" role="status" aria-live="polite"></p>
-  <p class="signup-small">Нажимая «Хочу попробовать ЛАД», вы соглашаетесь на обработку адреса электронной почты, чтобы мы могли написать вам, когда откроем доступ.</p>
+  <p class="signup-small">Ранний доступ бесплатный, карта не нужна. Нажимая «Записаться», вы соглашаетесь на обработку адреса электронной почты, чтобы мы могли написать вам, когда откроем доступ.</p>
 </section>
 
 </main>
 
 <footer class="footer">
-  <div class="footer-brand">
-    <svg class="footer-mark" viewBox="0 0 160 160" aria-hidden="true"><rect width="160" height="160" rx="40" fill="#ffd66b"/><path d="M30 134V76L80 30l50 46v58z" fill="#2b2621"/><path d="M56 90l18 18 36-40" fill="none" stroke="#ffd66b" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <strong>ЛАД</strong>
-    <span>· Личный Администратор Дома · продукт Cogintech</span>
-  </div>
-  <span class="footer-line">Дом, в котором всё ладится.</span>
+  <svg class="footer-mark" viewBox="0 0 160 160" aria-hidden="true"><rect width="160" height="160" rx="40" fill="#ffd66b"/><path d="M30 134V76L80 30l50 46v58z" fill="#2b2621"/><path d="M56 90l18 18 36-40" fill="none" stroke="#ffd66b" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <strong>ЛАД</strong>
+  <span>· Личный Администратор Дома · продукт Cogintech</span>
 </footer>
 
 </div>
