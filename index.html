@@ -932,7 +932,7 @@ section[id] { scroll-margin-top: 104px; }
   <form class="signup-form" id="signup-form" novalidate>
     <label class="visually-hidden" for="email">Электронная почта</label>
     <input id="email" name="email" type="email" required autocomplete="email" placeholder="Электронная почта">
-    <input class="trap" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <input class="trap" name="_gotcha" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn btn-yellow" type="submit">Записаться</button>
   </form>
   <p class="signup-status" id="signup-status" role="status" aria-live="polite"></p>
@@ -950,9 +950,11 @@ section[id] { scroll-margin-top: 104px; }
 </div>
 
 <script>
-// Адрес, который принимает заявки: POST с JSON { email, source }.
-// Пока он пуст, форма честно сообщает, что запись не подключена.
-const SIGNUP_ENDPOINT = '';
+// Заявки пишутся в Supabase через функцию join_waitlist — см. supabase/README.md.
+// Пока URL и ключ пусты, форма честно сообщает, что запись не подключена.
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
+const REQUEST_TIMEOUT_MS = 10000;
 
 const form = document.getElementById('signup-form');
 const statusEl = document.getElementById('signup-status');
@@ -962,18 +964,58 @@ function setStatus(kind, text) {
   statusEl.textContent = text;
 }
 
+// utm_* из адреса страницы — чтобы понимать, откуда пришла семья.
+function collectUtm() {
+  const utm = {};
+  for (const [key, value] of new URLSearchParams(location.search)) {
+    if (key.startsWith('utm_') && value) utm[key.slice(0, 50)] = value.slice(0, 200);
+  }
+  return Object.keys(utm).length ? utm : null;
+}
+
+async function joinWaitlist(email) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/join_waitlist`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({
+        p_email: email,
+        p_source: 'landing-beta',
+        p_utm: collectUtm(),
+        p_referrer: document.referrer || null,
+      }),
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(String(response.status));
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const email = form.email.value.trim();
+  const email = form.email.value.trim().toLowerCase();
   const button = form.querySelector('button');
+  const thanks = `Спасибо! Напишем на ${email}, когда откроем доступ.`;
 
-  if (form.company.value) return; // поле-ловушка для ботов
   if (!email || !form.email.checkValidity()) {
     setStatus('error', 'Проверьте адрес почты — похоже, в нём ошибка.');
     form.email.focus();
     return;
   }
-  if (!SIGNUP_ENDPOINT) {
+  if (form._gotcha.value) {
+    // Поле-ловушка для ботов: ничего не отправляем, но отвечаем как обычно.
+    form.reset();
+    setStatus('success', thanks);
+    return;
+  }
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     setStatus('error', 'Запись ещё не подключена. Загляните чуть позже.');
     return;
   }
@@ -981,14 +1023,9 @@ form.addEventListener('submit', async (event) => {
   button.disabled = true;
   setStatus('', 'Отправляем…');
   try {
-    const response = await fetch(SIGNUP_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, source: 'landing-beta' }),
-    });
-    if (!response.ok) throw new Error(String(response.status));
+    await joinWaitlist(email);
     form.reset();
-    setStatus('success', `Спасибо! Напишем на ${email}, когда откроем доступ.`);
+    setStatus('success', thanks);
   } catch {
     setStatus('error', 'Не получилось отправить. Попробуйте ещё раз чуть позже.');
   } finally {
