@@ -28,4 +28,4 @@ npm install --prefix /tmp/lad-waitlist-browser-tools --cache /workspace/.npm-cac
 NODE_PATH=/tmp/lad-waitlist-browser-tools/node_modules node scripts/test-waitlist-browser.cjs
 ```
 
-The browser tests intercept all external requests (including Turnstile and the backend), exercise validation/failure/retry/success at 390px and 1280px, and never submit to the real waitlist. Set `CHROMIUM_PATH` if Chromium is not at `/usr/bin/chromium`.
+The browser tests block external HTTPS requests and use a visible Turnstile fixture plus a local API on a second origin. They verify real CORS preflights separately from signup POSTs, validation/failure/retry/success at 320px, 360px, 390px and 1280px, compact widget sizing after resize, and submission with `AbortSignal.timeout` unavailable. A stalled request also checks timeout recovery. No requests are sent to the real waitlist. Set `CHROMIUM_PATH` if Chromium is not at `/usr/bin/chromium`.
