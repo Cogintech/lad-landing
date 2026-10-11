@@ -36,3 +36,9 @@ Apply migration **021** to the existing Supabase project, then redeploy `waitlis
 No Turnstile site key, script, widget or server verification is used. The old `TURNSTILE_SECRET_KEY` can be removed after the function update. Retain `WAITLIST_ALLOWED_ORIGINS=https://ladvdome.app` and keep JWT verification disabled for this public endpoint.
 
 The initial database limits are 30 submissions/minute and 500/day globally, plus 3/hour per normalized email, including duplicates. Rejected requests return 429 and preserve the entered email. These limits reduce simple abuse but a bot can exhaust shared quotas; tune them for campaigns. There is no automatic email send on this public endpoint.
+
+### Per-source limits (Copilot review follow-up)
+
+Before deploying the updated backend, also apply `022_waitlist_source_limits.sql` and verify its gateway IP trust configuration using `docs/waitlist/README.md` in `kukhnya-os`. The backend now limits each verified IPv4 address or IPv6 /64 to 5 attempts/minute and 20/day **before** shared quotas. Rejected sources consume no additional global quota. Raw IP addresses are not stored by the limiter; it uses server-keyed hashes. Distributed sources can still exhaust shared capacity, and users sharing a NAT/prefix share a source quota.
+
+The source identity must be supplied by an ingress that overwrites the selected header and cannot be bypassed. The function fails closed if the trusted header is not configured or usable. Its actual Supabase ingress behavior must be verified before rollout; seeing an IP-shaped header is not sufficient. The accompanying read-only `waitlist-source-check` diagnostic and `scripts/check-waitlist-source.mjs` run spoofing probes without creating applicants. No browser-supplied source identifier or additional browser dependency is introduced.
