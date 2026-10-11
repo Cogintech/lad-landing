@@ -931,10 +931,11 @@ section[id] { scroll-margin-top: 104px; }
   <p class="lead">Оставьте почту — напишем, когда откроем доступ, и поможем всё настроить.</p>
   <form class="signup-form" id="signup-form" novalidate>
     <label class="visually-hidden" for="email">Электронная почта</label>
-    <input id="email" name="email" type="email" required autocomplete="email" placeholder="Электронная почта">
+    <input id="email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="Электронная почта">
     <input class="trap" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn btn-yellow" type="submit">Записаться</button>
   </form>
+  <div id="signup-verification" style="width: 100%; max-width: 560px; margin-top: 12px;"></div>
   <p class="signup-status" id="signup-status" role="status" aria-live="polite"></p>
   <p class="signup-small">Ранний доступ бесплатный, карта не нужна. Нажимая «Записаться», вы соглашаетесь на обработку адреса электронной почты, чтобы мы могли написать вам, когда откроем доступ.</p>
 </section>
@@ -949,52 +950,7 @@ section[id] { scroll-margin-top: 104px; }
 
 </div>
 
-<script>
-// Адрес, который принимает заявки: POST с JSON { email, source }.
-// Пока он пуст, форма честно сообщает, что запись не подключена.
-const SIGNUP_ENDPOINT = '';
-
-const form = document.getElementById('signup-form');
-const statusEl = document.getElementById('signup-status');
-
-function setStatus(kind, text) {
-  statusEl.dataset.kind = kind;
-  statusEl.textContent = text;
-}
-
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const email = form.email.value.trim();
-  const button = form.querySelector('button');
-
-  if (form.company.value) return; // поле-ловушка для ботов
-  if (!email || !form.email.checkValidity()) {
-    setStatus('error', 'Проверьте адрес почты — похоже, в нём ошибка.');
-    form.email.focus();
-    return;
-  }
-  if (!SIGNUP_ENDPOINT) {
-    setStatus('error', 'Запись ещё не подключена. Загляните чуть позже.');
-    return;
-  }
-
-  button.disabled = true;
-  setStatus('', 'Отправляем…');
-  try {
-    const response = await fetch(SIGNUP_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, source: 'landing-beta' }),
-    });
-    if (!response.ok) throw new Error(String(response.status));
-    form.reset();
-    setStatus('success', `Спасибо! Напишем на ${email}, когда откроем доступ.`);
-  } catch {
-    setStatus('error', 'Не получилось отправить. Попробуйте ещё раз чуть позже.');
-  } finally {
-    button.disabled = false;
-  }
-});
-</script>
+<script src="waitlist-config.js"></script>
+<script src="waitlist.js"></script>
 </body>
 </html>
